@@ -17,7 +17,7 @@ class Resumen {
   String universidad;
   String carrera;
   String materia;
-  List<Profesor> profesores;
+  List<dynamic> profesores;
   String unidades;
 
   Resumen({

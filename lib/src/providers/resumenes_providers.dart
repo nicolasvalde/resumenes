@@ -9,12 +9,36 @@ class ResumenesProvider {
   Future<List<Resumen>> getAll() async {
     final url = Uri.http(_url, 'resumenes');
 
-    final respuesta = await http.get(url, headers: {"Accept": "application/json"});
+    final respuesta =
+        await http.get(url, headers: {"Accept": "application/json"});
 
     final decodedData = json.decode(respuesta.body);
 
-    print(decodedData);
+    final resumenes = new Resumenes.fromJsonList(decodedData);
 
-    return [];
+    return resumenes.items;
   }
+
+  Future<Resumen> getById(String id) async {
+    final url = Uri.http(_url, 'resumenes/$id');
+
+    final respuesta =
+        await http.get(url, headers: {"Accept": "application/json"});
+
+    final decodedData = json.decode(respuesta.body);
+
+    final resumen = new Resumen.fromJsonMap(decodedData);
+
+    return resumen;
+  }
+
+  Future save() async {
+    final url = Uri.http(_url, 'resumenes');
+
+    // final respuesta = await http.post(url, headers: {"Accept": "application/json"}, body null, encoding null);
+  }
+
+  update() {}
+
+  delete() {}
 }

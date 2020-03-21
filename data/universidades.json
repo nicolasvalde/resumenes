@@ -1,0 +1,19 @@
+{
+    "universidades": [
+        {
+            "id": "uncuyo",
+            "nombre": "Universidad Nacional de Cuyo",
+            "imagen": "escudoUncuyo.jpg"
+        },
+        {
+            "id": "aconcagua",
+            "nombre": "Universidad del Aconcagua",
+            "imagen": "logoAconcagua.jpg"
+        },
+        {
+            "id": "champagnat",
+            "nombre": "Universidad Champagnat",
+            "imagen": "logoChampagnat.png"
+        }
+    ]
+}
