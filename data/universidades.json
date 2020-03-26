@@ -3,17 +3,96 @@
         {
             "id": "uncuyo",
             "nombre": "Universidad Nacional de Cuyo",
-            "imagen": "escudoUncuyo.jpg"
+            "imagen": "escudoUncuyo.jpg",
+            "facultades": [
+                {
+                    "id": "fce",
+                    "nombre": "Facultad de Cs Económicas",
+                    "carreras": [
+                        {
+                            "id": "cpn",
+                            "nombre": "Contador Público Nacional",
+                            "materias": [
+                                {
+                                    "nombre": "Contabilidad Básica"
+                                },
+                                {
+                                    "nombre": "Introducción a la economía I"
+                                },
+                                {
+                                    "nombre": "Cálculo"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "la",
+                            "nombre": "Licenciatura en Administración"
+                        }
+                    ]
+                },
+                {
+                    "id": "fcs",
+                    "nombre": "Facultad de Cs Sociales"
+                },
+                {
+                    "id": "fad",
+                    "nombre": "Facultad de Arte y Diseño"
+                }
+            ]
         },
         {
             "id": "aconcagua",
             "nombre": "Universidad del Aconcagua",
-            "imagen": "logoAconcagua.jpg"
+            "imagen": "logoAconcagua.jpg",
+            "facultades": [
+                {
+                    "id": "fcsa",
+                    "nombre": "Facultad de Cs. Sociales y Administrativas",
+                    "carreras": [
+                        {
+                            "id": "inf",
+                            "nombre": "Lic. en Informática y Desarrollo de Software",
+                            "materias":[
+                                {
+                                    "nombre": "Matemática"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": "champagnat",
             "nombre": "Universidad Champagnat",
             "imagen": "logoChampagnat.png"
+        },
+        {
+            "id": "uca",
+            "nombre": "Universidad Católica Argentina",
+            "imagen": "logoUca.png",
+            "facultades": [
+                {
+                    "id": "fp",
+                    "nombre": "Facultad de Psicología",
+                    "carreras": [
+                        {
+                            "id": "psi",
+                            "nombre": "Licenciatura en Psicología"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id":"maza",
+            "nombre": "Universidad Juan Agustín Maza",
+            "imagen": "logoMaza.png"
+        },
+        {
+            "id":"congreso",
+            "nombre": "Universidad de Congreso",
+            "imagen": "logoCongreso.png"
         }
     ]
 }

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:resumenes/src/providers/menu_provider.dart';
-import 'package:resumenes/src/providers/resumenes_providers.dart';
-import 'package:getflutter/getflutter.dart';
 import 'package:resumenes/src/widgets/CustomTile.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  // HomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
+  String arguments;
+
+  HomePage(arguments) {
+    this.arguments = arguments;
+  }
+
+  final String title = 'Universidades';
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,22 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // showSearch(
-              // context: context,
-              // delegate: CustomSearchDelegate(),
-              // );
-              menuProvider.cargarData().then((universidades) {
-                print(universidades);
-              });
-              // ResumenesProvider resumenesProvider = new ResumenesProvider();
-              // resumenesProvider.getById('5e6b93240dab7e1efe10424a');
-            },
-          )
-        ],
+        actions: <Widget>[],
       ),
       body: _lista(),
       floatingActionButton: FloatingActionButton(

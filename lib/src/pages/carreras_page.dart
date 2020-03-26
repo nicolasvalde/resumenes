@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:resumenes/src/providers/facultades_provider.dart';
+import 'package:resumenes/src/providers/carreras_provider.dart';
 import 'package:resumenes/src/widgets/CTNoAvatar.dart';
 
-class FacultadesPage extends StatefulWidget {
-  // FacultadesPage({Key key, this.title}) : super(key: key);
+class CarrerasPage extends StatefulWidget {
+  // CarrerasPage({Key key, this.title}) : super(key: key);
 
-  //Acá viene el nombre de la UNIVERSIDAD
+  //Acá viene el nombre de la UNIVERSIDAD y la FACULTAD
   final Map<String, Object> arguments;
 
-  FacultadesPage(this.arguments);
+  CarrerasPage(this.arguments);
 
   @override
-  _FacultadesPageState createState() => _FacultadesPageState();
+  _CarrerasPageState createState() => _CarrerasPageState();
 }
 
-class _FacultadesPageState extends State<FacultadesPage> {
+class _CarrerasPageState extends State<CarrerasPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -27,7 +27,7 @@ class _FacultadesPageState extends State<FacultadesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.arguments['nombreUniversidad']),
+        title: Text(widget.arguments['nombreFacultad']),
         actions: <Widget>[],
       ),
       body: _lista(),
@@ -40,13 +40,10 @@ class _FacultadesPageState extends State<FacultadesPage> {
   }
 
   Widget _lista() {
-
     print(widget.arguments);
-
     return FutureBuilder(
-      // Busca las facultades de acuerdo a argument (nombre de la universidad)
-      future:
-          facultadesProvider.cargarData(widget.arguments['nombreUniversidad']),
+      future: carrerasProvider.cargarData(widget.arguments['nombreUniversidad'],
+          widget.arguments['nombreFacultad']),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
@@ -58,16 +55,18 @@ class _FacultadesPageState extends State<FacultadesPage> {
   }
 
   List<Widget> _listaItems(List<dynamic> data) {
-    final List<Widget> facultades = [];
+    final List<Widget> carreras = [];
     if (data != null) {
-      data.forEach((f) {
-        final widgetTemp = CustomTileNoAvatar('facultades',
+      data.forEach((c) {
+        final widgetTemp = CustomTileNoAvatar('carreras',
             nombreUniversidad: widget.arguments['nombreUniversidad'],
-            nombreFacultad: f['nombre']);
-        facultades.add(widgetTemp);
+            nombreFacultad: widget.arguments['nombreFacultad'],
+            nombreCarrera: c['nombre']);
+        carreras.add(widgetTemp);
+        // carreras.add(Divider());
       });
     }
 
-    return facultades;
+    return carreras;
   }
 }
