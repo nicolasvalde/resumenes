@@ -78,7 +78,12 @@ class CustomTileNoAvatar extends StatelessWidget {
                 break;
               case 'materias':
                 {
-                  Navigator.pushNamed(context, 'resumenes', arguments: null);
+                  Navigator.pushNamed(context, 'resumenes', arguments: {
+                    'nombreUniversidad': nombreUniversidad,
+                    'nombreFacultad': nombreFacultad,
+                    'nombreCarrera': nombreCarrera,
+                    'nombreMateria': nombreMateria
+                  });
                 }
             }
           },
