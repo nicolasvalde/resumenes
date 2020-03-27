@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
 
-class ResumenesProvider {
+class _ResumenesProvider {
   String _url = '10.0.2.2:8080';
+  // String _url = '192.168.1.2:8080';
+
+  _ResumenesProvider() {}
 
   Future<List<Resumen>> getAll() async {
     final url = Uri.http(_url, 'resumenes');
@@ -42,3 +45,5 @@ class ResumenesProvider {
 
   delete() {}
 }
+
+final resumenesProvider = new _ResumenesProvider();
