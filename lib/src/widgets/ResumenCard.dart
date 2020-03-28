@@ -24,15 +24,23 @@ class ResumenCard extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Text('Autor: ${resumen.materia} '),
-                    Text('Fecha de subida: ${resumen.fechaSubida}')
+                    Text('Descripción: ${resumen.descripcion}')
                   ],
                 ),
                 Row(
-                  children: <Widget>[Text('Descripción: ${resumen.descripcion}')],
+                  children: <Widget>[
+                    Text('Autor: ${resumen.autor} '),
+                  ],
                 ),
                 Row(
-                  children: <Widget>[Text('Año de cursado: ${resumen.yearCursado}')],
+                  children: <Widget>[
+                    Text('Año de cursado: ${resumen.yearCursado}')
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text('Fecha de subida: ${resumen.fechaSubida}')
+                  ],
                 )
               ],
             ),

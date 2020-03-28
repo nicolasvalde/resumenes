@@ -14,6 +14,7 @@ class Resumenes {
 
 class Resumen {
   String id;
+  String autor;
   String universidad;
   String carrera;
   String materia;
@@ -23,6 +24,7 @@ class Resumen {
 
   Resumen(
       {this.id,
+      this.autor,
       this.universidad,
       this.carrera,
       this.materia,
@@ -31,10 +33,11 @@ class Resumen {
       this.yearCursado});
 
   Resumen.fromJsonMap(Map<String, dynamic> json) {
-    id = json['id'];
+    id          = json['id'];
+    autor       = json['autor'];
     universidad = json['universidad'];
-    carrera = json['carrera'];
-    materia = json['materia'];
+    carrera     = json['carrera'];
+    materia     = json['materia'];
     fechaSubida = json['fechaSubida'];
     descripcion = json['descripcion'];
     yearCursado = json['yearCursado'];
