@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resumenes/src/pages/upload_page.dart';
 import 'package:resumenes/src/providers/menu_provider.dart';
 import 'package:resumenes/src/widgets/CustomTile.dart';
 
@@ -20,6 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
 
+  int _selectedBottomIndex = 0;
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -33,12 +36,30 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         actions: <Widget>[],
       ),
-      body: _lista(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Row(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width,
+            // padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+            child: _lista(),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+            child: UploadPage(null),
+          )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedBottomIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add), title: Text('Subí tu resumen')),
+        ],
+        onTap: _onItemTapped,
+      ),
     );
   }
 
@@ -65,5 +86,11 @@ class _HomePageState extends State<HomePage> {
     });
 
     return universidades;
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedBottomIndex = index;
+    });
   }
 }

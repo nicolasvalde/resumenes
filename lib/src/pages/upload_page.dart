@@ -17,6 +17,8 @@ class _UploadPageState extends State<UploadPage> {
   String _selectedCarreraValue;
   String _selectedMateriaValue;
 
+  int bottom = 1;
+
   // List listUniversidades = ['Elegí una universidad'];
   // List listFacultades = ['Elegí una facultad'];
   // List listCarreras = ['Elegí una carrera'];
@@ -29,11 +31,13 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Subí tu resumen'),
-        ),
-        body: Container(
+    return 
+    // Scaffold(
+    //     appBar: AppBar(
+    //       title: Text('Subí tu resumen'),
+    //     ),
+    //     body: 
+        Container(
           padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
           child: Builder(
             builder: (context) => Form(
@@ -58,7 +62,22 @@ class _UploadPageState extends State<UploadPage> {
               ),
             ),
           ),
-        ));
+        );
+        // bottomNavigationBar: BottomNavigationBar(
+        //   currentIndex: bottom,
+        //   items: [
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.add), title: Text('Subí tu resumen')),
+        //   ],
+        //   onTap: (bottom) {
+        //     Navigator.pushNamed(context, 'home');
+        //     setState(() {
+        //       bottom = 1;
+        //     });
+        //   },
+        // ));
   }
 
   Widget _universidadesDropdown() {

@@ -20,12 +20,12 @@ class _ResumenesPageState extends State<ResumenesPage> {
         title: Text(widget.arguments['nombreMateria']),
       ),
       body: Center(child: _lista()),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, 'upload');
-        },
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, 'upload');
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 
