@@ -15,7 +15,11 @@ class _ResumenesProvider {
     final respuesta =
         await http.get(url, headers: {"Accept": "application/json"});
 
-    final decodedData = json.decode(respuesta.body);
+    String source = Utf8Decoder().convert(respuesta.bodyBytes);
+
+    print(source);
+
+    final decodedData = json.decode(source);
 
     final resumenes = new Resumenes.fromJsonList(decodedData);
 
@@ -28,7 +32,11 @@ class _ResumenesProvider {
     final respuesta =
         await http.get(url, headers: {"Accept": "application/json"});
 
-    final decodedData = json.decode(respuesta.body);
+    String source = Utf8Decoder().convert(respuesta.bodyBytes);
+
+    print(source);
+
+    final decodedData = json.decode(source);
 
     final resumen = new Resumen.fromJsonMap(decodedData);
 

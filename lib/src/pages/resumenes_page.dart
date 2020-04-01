@@ -21,7 +21,9 @@ class _ResumenesPageState extends State<ResumenesPage> {
       ),
       body: Center(child: _lista()),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, 'upload');
+        },
         child: Icon(Icons.add),
       ),
     );

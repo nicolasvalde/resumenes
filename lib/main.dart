@@ -4,6 +4,7 @@ import 'package:resumenes/src/pages/facultades_page.dart';
 import 'package:resumenes/src/pages/home_page.dart';
 import 'package:resumenes/src/pages/materias_page.dart';
 import 'package:resumenes/src/pages/resumenes_page.dart';
+import 'package:resumenes/src/pages/upload_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'App Resúmenes',
       theme: ThemeData(
         // This is the theme of your application.
@@ -44,7 +46,9 @@ class MyApp extends StatelessWidget {
           'materias': (BuildContext context) =>
               MateriasPage(settings.arguments),
           'resumenes': (BuildContext context) =>
-              ResumenesPage(settings.arguments)
+              ResumenesPage(settings.arguments),
+          'upload': (BuildContext context) =>
+              UploadPage(settings.arguments)
         };
         WidgetBuilder builder = routes[settings.name];
         return MaterialPageRoute(builder: (ctx) => builder(ctx));
