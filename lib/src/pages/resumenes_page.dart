@@ -5,6 +5,8 @@ import 'package:resumenes/src/widgets/ResumenCard.dart';
 class ResumenesPage extends StatefulWidget {
   final Map<String, Object> arguments;
 
+
+
   ResumenesPage(this.arguments);
 
   @override
@@ -54,4 +56,6 @@ class _ResumenesPageState extends State<ResumenesPage> {
     }
     return resumenes;
   }
+
+  
 }

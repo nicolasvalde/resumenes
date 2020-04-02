@@ -17,8 +17,6 @@ class _UploadPageState extends State<UploadPage> {
   String _selectedCarreraValue;
   String _selectedMateriaValue;
 
-  int bottom = 1;
-
   // List listUniversidades = ['Elegí una universidad'];
   // List listFacultades = ['Elegí una facultad'];
   // List listCarreras = ['Elegí una carrera'];
