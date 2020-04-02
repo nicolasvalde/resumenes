@@ -16,6 +16,7 @@ class Resumen {
   String id;
   String autor;
   String universidad;
+  String facultad;
   String carrera;
   String materia;
   String fechaSubida;
@@ -26,6 +27,7 @@ class Resumen {
       {this.id,
       this.autor,
       this.universidad,
+      this.facultad,
       this.carrera,
       this.materia,
       this.fechaSubida,
@@ -36,6 +38,7 @@ class Resumen {
     id          = json['id'];
     autor       = json['autor'];
     universidad = json['universidad'];
+    facultad    = json['facultad'];
     carrera     = json['carrera'];
     materia     = json['materia'];
     fechaSubida = json['fechaSubida'];

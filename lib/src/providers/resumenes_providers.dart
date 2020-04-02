@@ -43,9 +43,14 @@ class _ResumenesProvider {
     return resumen;
   }
 
-  Future save() async {
+  Future save(Map<String, String> data) async {
     final url = Uri.http(_url, 'resumenes');
 
+    var body = json.encode(data);
+    print(body);
+
+    final respuesta = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: body);
     // final respuesta = await http.post(url, headers: {"Accept": "application/json"}, body null, encoding null);
   }
 

@@ -3,6 +3,7 @@ import 'package:resumenes/src/providers/carreras_provider.dart';
 import 'package:resumenes/src/providers/facultades_provider.dart';
 import 'package:resumenes/src/providers/materias_provider.dart';
 import 'package:resumenes/src/providers/menu_provider.dart';
+import 'package:resumenes/src/providers/resumenes_providers.dart';
 
 class UploadPage extends StatefulWidget {
   UploadPage(Object arguments);
@@ -29,53 +30,63 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    // Scaffold(
-    //     appBar: AppBar(
-    //       title: Text('Subí tu resumen'),
-    //     ),
-    //     body: 
+    return
+        // Scaffold(
+        //     appBar: AppBar(
+        //       title: Text('Subí tu resumen'),
+        //     ),
+        //     body:
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-          child: Builder(
-            builder: (context) => Form(
-              child: Column(
-                children: <Widget>[
-                  _universidadesDropdown(),
-                  _facultadesDropdown(),
-                  _carrerasDropdown(),
-                  _materiasDropdown(),
-                  Center(
-                    child: RaisedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Subir',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.blue,
-                      splashColor: Colors.white,
-                    ),
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+      child: Builder(
+        builder: (context) => Form(
+          child: Column(
+            children: <Widget>[
+              _universidadesDropdown(),
+              _facultadesDropdown(),
+              _carrerasDropdown(),
+              _materiasDropdown(),
+              Center(
+                child: RaisedButton(
+                  onPressed: () {
+                    Map<String, String> body = new Map();
+                    body['autor'] = 'Nico';
+                    body['descripcion'] = 'Resumen de teoría';
+                    body['universidad'] = _selectedUniversidadValue;
+                    body['facultad'] = _selectedFacultadValue;
+                    body['carrera'] = _selectedCarreraValue;
+                    body['materia'] = _selectedMateriaValue;
+                    body['yearCursado'] = '2019';
+                    resumenesProvider.save(body);
+                  },
+                  child: Text(
+                    'Subir',
+                    style: TextStyle(color: Colors.white),
                   ),
-                ],
+                  color: Colors.blue,
+                  splashColor: Colors.white,
+                ),
               ),
-            ),
+            ],
           ),
-        );
-        // bottomNavigationBar: BottomNavigationBar(
-        //   currentIndex: bottom,
-        //   items: [
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.add), title: Text('Subí tu resumen')),
-        //   ],
-        //   onTap: (bottom) {
-        //     Navigator.pushNamed(context, 'home');
-        //     setState(() {
-        //       bottom = 1;
-        //     });
-        //   },
-        // ));
+        ),
+      ),
+    );
+    // bottomNavigationBar: BottomNavigationBar(
+    //   currentIndex: bottom,
+    //   items: [
+    //     BottomNavigationBarItem(
+    //         icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
+    //     BottomNavigationBarItem(
+    //         icon: Icon(Icons.add), title: Text('Subí tu resumen')),
+    //   ],
+    //   onTap: (bottom) {
+    //     Navigator.pushNamed(context, 'home');
+    //     setState(() {
+    //       bottom = 1;
+    //     });
+    //   },
+    // ));
   }
 
   Widget _universidadesDropdown() {
