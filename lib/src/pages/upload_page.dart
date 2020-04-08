@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resumenes/src/providers/carreras_provider.dart';
@@ -5,6 +7,8 @@ import 'package:resumenes/src/providers/facultades_provider.dart';
 import 'package:resumenes/src/providers/materias_provider.dart';
 import 'package:resumenes/src/providers/menu_provider.dart';
 import 'package:resumenes/src/providers/resumenes_providers.dart';
+
+import 'package:file_picker/file_picker.dart';
 
 class UploadPage extends StatefulWidget {
   UploadPage(Object arguments);
@@ -22,6 +26,8 @@ class _UploadPageState extends State<UploadPage> {
   String _selectedMateriaValue;
   String _yearCursado;
 
+  String _filePath;
+
   // List listUniversidades = ['Elegí una universidad'];
   // List listFacultades = ['Elegí una facultad'];
   // List listCarreras = ['Elegí una carrera'];
@@ -34,41 +40,24 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-      child: Builder(
-        builder: (context) => Form(
-          child: Column(
-            children: <Widget>[
-              _autorTextField(),
-              _descripcionTextField(),
-              _yearCursadoTextField(),
-              _universidadesDropdown(),
-              _facultadesDropdown(),
-              _carrerasDropdown(),
-              _materiasDropdown(),
-              Center(
-                child: RaisedButton(
-                  onPressed: () {
-                    Map<String, String> body = new Map();
-                    body['autor'] = _autor;
-                    body['descripcion'] = _descripcion;
-                    body['universidad'] = _selectedUniversidadValue;
-                    body['facultad'] = _selectedFacultadValue;
-                    body['carrera'] = _selectedCarreraValue;
-                    body['materia'] = _selectedMateriaValue;
-                    body['yearCursado'] = _yearCursado;
-                    resumenesProvider.save(body);
-                  },
-                  child: Text(
-                    'Subir',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.blue,
-                  splashColor: Colors.white,
-                ),
-              ),
-            ],
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+        child: Builder(
+          builder: (context) => Form(
+            child: Column(
+              children: <Widget>[
+                _autorTextField(),
+                _descripcionTextField(),
+                _yearCursadoTextField(),
+                _universidadesDropdown(),
+                _facultadesDropdown(),
+                _carrerasDropdown(),
+                _materiasDropdown(),
+                Expanded(flex: 25, child: _fileSection()),
+                Expanded(flex: 4, child: _uploadButton())
+              ],
+            ),
           ),
         ),
       ),
@@ -290,5 +279,105 @@ class _UploadPageState extends State<UploadPage> {
         ),
       );
     }
+  }
+
+  Widget _fileSection() {
+    if (_filePath == null) {
+      return Center(
+        child: RaisedButton(
+          child: Text('Seleccionar archivo',
+              style: TextStyle(color: Colors.white)),
+          onPressed: () async {
+            var path = await FilePicker.getFilePath(type: FileType.any);
+            setState(() {
+              _filePath = path;
+            });
+          },
+          color: Colors.blue,
+          splashColor: Colors.white,
+        ),
+      );
+    } else if (_filePath != null) {
+      return Center(
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.attach_file),
+                title: Text(_filePath.split("/").last),
+                // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+              ),
+              ButtonBar(
+                children: <Widget>[
+                  // FlatButton(
+                  //   child: const Text('BUY TICKETS'),
+                  //   onPressed: () {/* ... */},
+                  // ),
+                  FlatButton(
+                    child: const Text('Eliminar'),
+                    onPressed: () {
+                      setState(() {
+                        _filePath = null;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget _uploadButton() {
+    return Center(
+      child: RaisedButton(
+        onPressed: () async {
+          Map<String, String> body = new Map();
+          body['autor'] = _autor;
+          body['descripcion'] = _descripcion;
+          body['universidad'] = _selectedUniversidadValue;
+          body['facultad'] = _selectedFacultadValue;
+          body['carrera'] = _selectedCarreraValue;
+          body['materia'] = _selectedMateriaValue;
+          body['yearCursado'] = _yearCursado;
+          await resumenesProvider.save(body, _filePath);
+          showDialog(
+              context: context,
+              child: AlertDialog(
+                // title: Text("Resumen guardado con éxito"),
+                content: Text("Resumen guardado con éxito"),
+                actions: <Widget>[
+                  FlatButton(onPressed: (){Navigator.pop(context);}, child: Text("Aceptar"))
+                ],
+              ));
+          _alerta();
+          setState(() {
+            _autor = "";
+            _descripcion = "";
+            _selectedUniversidadValue = null;
+            _selectedFacultadValue = null;
+            _selectedCarreraValue = null;
+            _selectedMateriaValue = null;
+            _yearCursado = null;
+            _filePath = null;
+          });
+        },
+        child: Text(
+          'Subir',
+          style: TextStyle(color: Colors.white),
+        ),
+        color: Colors.blue,
+        splashColor: Colors.white,
+      ),
+    );
+  }
+
+  Widget _alerta() {
+    return AlertDialog(
+      title: Text("Resumen guardado con éxito"),
+    );
   }
 }

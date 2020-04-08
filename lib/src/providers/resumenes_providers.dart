@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
@@ -43,13 +44,26 @@ class _ResumenesProvider {
     return resumen;
   }
 
-  Future save(Map<String, String> data) async {
+  Future save(Map<String, String> data, String file) async {
     final url = Uri.http(_url, 'resumenes');
 
     var body = json.encode(data);
 
-    final respuesta = await http.post(url,
-        headers: {"Content-Type": "application/json"}, body: body);
+    // final respuesta = await http.post(url,
+    // headers: {"Content-Type": "multipart/form-data"}, body: body);
+    // headers: {"Content-Type": "application/json"}, body: body);
+
+    final respuesta = http.MultipartRequest('POST', url);
+
+    respuesta.fields['resumen'] = body;
+
+    respuesta.files.add(
+      await http.MultipartFile.fromPath('file', file),
+    );
+
+    print(respuesta.files[0]);
+
+    await respuesta.send();
 
     return respuesta;
   }
