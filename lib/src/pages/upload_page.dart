@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:resumenes/src/providers/carreras_provider.dart';
 import 'package:resumenes/src/providers/facultades_provider.dart';
 import 'package:resumenes/src/providers/materias_provider.dart';
@@ -13,10 +14,13 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
+  String _autor;
+  String _descripcion;
   String _selectedUniversidadValue;
   String _selectedFacultadValue;
   String _selectedCarreraValue;
   String _selectedMateriaValue;
+  String _yearCursado;
 
   // List listUniversidades = ['Elegí una universidad'];
   // List listFacultades = ['Elegí una facultad'];
@@ -30,18 +34,15 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Scaffold(
-        //     appBar: AppBar(
-        //       title: Text('Subí tu resumen'),
-        //     ),
-        //     body:
-        Container(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: Builder(
         builder: (context) => Form(
           child: Column(
             children: <Widget>[
+              _autorTextField(),
+              _descripcionTextField(),
+              _yearCursadoTextField(),
               _universidadesDropdown(),
               _facultadesDropdown(),
               _carrerasDropdown(),
@@ -50,13 +51,13 @@ class _UploadPageState extends State<UploadPage> {
                 child: RaisedButton(
                   onPressed: () {
                     Map<String, String> body = new Map();
-                    body['autor'] = 'Nico';
-                    body['descripcion'] = 'Resumen de teoría';
+                    body['autor'] = _autor;
+                    body['descripcion'] = _descripcion;
                     body['universidad'] = _selectedUniversidadValue;
                     body['facultad'] = _selectedFacultadValue;
                     body['carrera'] = _selectedCarreraValue;
                     body['materia'] = _selectedMateriaValue;
-                    body['yearCursado'] = '2019';
+                    body['yearCursado'] = _yearCursado;
                     resumenesProvider.save(body);
                   },
                   child: Text(
@@ -72,21 +73,51 @@ class _UploadPageState extends State<UploadPage> {
         ),
       ),
     );
-    // bottomNavigationBar: BottomNavigationBar(
-    //   currentIndex: bottom,
-    //   items: [
-    //     BottomNavigationBarItem(
-    //         icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
-    //     BottomNavigationBarItem(
-    //         icon: Icon(Icons.add), title: Text('Subí tu resumen')),
-    //   ],
-    //   onTap: (bottom) {
-    //     Navigator.pushNamed(context, 'home');
-    //     setState(() {
-    //       bottom = 1;
-    //     });
-    //   },
-    // ));
+  }
+
+  Widget _autorTextField() {
+    return Center(
+      child: TextField(
+        decoration: InputDecoration(labelText: 'Tu nombre o apodo'),
+        onChanged: (valor) {
+          setState(() {
+            _autor = valor;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _descripcionTextField() {
+    return Center(
+      child: TextField(
+        decoration: InputDecoration(
+            labelText: 'Una breve descripción de lo que estás subiendo'),
+        onChanged: (valor) {
+          setState(() {
+            _descripcion = valor;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _yearCursadoTextField() {
+    return Center(
+      child: TextField(
+        inputFormatters: <TextInputFormatter>[
+          WhitelistingTextInputFormatter.digitsOnly
+        ],
+        keyboardType: TextInputType.number,
+        decoration:
+            InputDecoration(labelText: 'En qué año cursaste la materia?'),
+        onChanged: (valor) {
+          setState(() {
+            _yearCursado = valor;
+          });
+        },
+      ),
+    );
   }
 
   Widget _universidadesDropdown() {

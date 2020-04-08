@@ -5,8 +5,6 @@ import 'package:resumenes/src/widgets/ResumenCard.dart';
 class ResumenesPage extends StatefulWidget {
   final Map<String, Object> arguments;
 
-
-
   ResumenesPage(this.arguments);
 
   @override
@@ -46,16 +44,13 @@ class _ResumenesPageState extends State<ResumenesPage> {
 
   List<Widget> _listaItems(List<dynamic> data) {
     final List<Widget> resumenes = [];
-    for (var i = 0; i < 10; i++) {
-      if (data != null) {
-        data.forEach((r) {
-          final cardTemp = new ResumenCard(r);
-          resumenes.add(cardTemp);
-        });
-      }
+
+    if (data != null) {
+      data.forEach((r) {
+        final cardTemp = new ResumenCard(r);
+        resumenes.add(cardTemp);
+      });
     }
     return resumenes;
   }
-
-  
 }
