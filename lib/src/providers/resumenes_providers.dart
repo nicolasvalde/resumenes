@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:path_provider/path_provider.dart';
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:open_file/open_file.dart';
 
 class _ResumenesProvider {
   String _url = '10.0.2.2:8080';
@@ -71,6 +73,30 @@ class _ResumenesProvider {
   update() {}
 
   delete() {}
+
+  Future download(String id) async {
+    Directory downloadsDir = await getExternalStorageDirectory();
+    String downloadsPath = downloadsDir.path;
+
+    final url = Uri.http(_url, 'resumenes/download/$id');
+
+    print(downloadsPath);
+    HttpClient client = new HttpClient();
+    var _downloadData = List<int>();
+    var fileSave = new File(downloadsPath + "/logo.jpg");
+
+    await client.getUrl(url).then((HttpClientRequest request) {
+      return request.close();
+    }).then((HttpClientResponse response) {
+      response.listen((d) => _downloadData.addAll(d), onDone: () {
+        print(id);
+        print(fileSave.path);
+        print("length de la mierda esta: " + _downloadData.length.toString());
+        fileSave.writeAsBytes(_downloadData);
+        OpenFile.open(downloadsPath + "/logo.jpg");
+      });
+    });
+  }
 }
 
 final resumenesProvider = new _ResumenesProvider();

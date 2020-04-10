@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resumenes/src/providers/carreras_provider.dart';
@@ -341,6 +339,7 @@ class _UploadPageState extends State<UploadPage> {
           body['universidad'] = _selectedUniversidadValue;
           body['facultad'] = _selectedFacultadValue;
           body['carrera'] = _selectedCarreraValue;
+          body['materia'] = _selectedMateriaValue;
           body['materia'] = _selectedMateriaValue;
           body['yearCursado'] = _yearCursado;
           await resumenesProvider.save(body, _filePath);

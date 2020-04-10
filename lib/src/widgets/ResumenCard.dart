@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resumenes/src/models/resumen_model.dart';
+import 'package:resumenes/src/widgets/DownloadDialog.dart';
 
 class ResumenCard extends StatelessWidget {
   final Resumen resumen;
@@ -16,6 +17,10 @@ class ResumenCard extends StatelessWidget {
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
             print('Card tapped.');
+            showDialog(
+              context: context,
+              child: DownloadDialog(resumen),
+            );
           },
           child: Container(
             width: 400,
