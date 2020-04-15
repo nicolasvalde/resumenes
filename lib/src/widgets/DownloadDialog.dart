@@ -22,7 +22,7 @@ class DownloadDialog extends StatelessWidget {
             textColor: Colors.white,
             splashColor: Colors.white,
             onPressed: () {
-              resumenesProvider.download(resumen.id);
+              resumenesProvider.download(resumen.id, resumen.fileName, context);
             },
           )
         ],

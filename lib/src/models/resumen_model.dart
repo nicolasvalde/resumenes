@@ -21,7 +21,7 @@ class Resumen {
   String materia;
   String fechaSubida;
   String descripcion;
-  String fileExtension;
+  String fileName;
   int yearCursado;
 
   Resumen(
@@ -33,7 +33,7 @@ class Resumen {
       this.materia,
       this.fechaSubida,
       this.descripcion,
-      this.fileExtension,
+      this.fileName,
       this.yearCursado});
 
   Resumen.fromJsonMap(Map<String, dynamic> json) {
@@ -45,7 +45,7 @@ class Resumen {
     materia     = json['materia'];
     fechaSubida = json['fechaSubida'];
     descripcion = json['descripcion'];
-    fileExtension = json['fileExtension'];
+    fileName = json['fileName'];
     yearCursado = json['yearCursado'];
   }
 }

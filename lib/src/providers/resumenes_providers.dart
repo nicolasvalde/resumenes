@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +75,7 @@ class _ResumenesProvider {
 
   delete() {}
 
-  Future download(String id) async {
+  Future download(String id, String fileName, BuildContext context) async {
     Directory downloadsDir = await getExternalStorageDirectory();
     String downloadsPath = downloadsDir.path;
 
@@ -83,17 +84,15 @@ class _ResumenesProvider {
     print(downloadsPath);
     HttpClient client = new HttpClient();
     var _downloadData = List<int>();
-    var fileSave = new File(downloadsPath + "/logo.jpg");
+    var fileSave = new File(downloadsPath + "/$fileName");
 
     await client.getUrl(url).then((HttpClientRequest request) {
       return request.close();
     }).then((HttpClientResponse response) {
       response.listen((d) => _downloadData.addAll(d), onDone: () {
-        print(id);
-        print(fileSave.path);
-        print("length de la mierda esta: " + _downloadData.length.toString());
         fileSave.writeAsBytes(_downloadData);
-        OpenFile.open(downloadsPath + "/logo.jpg");
+        OpenFile.open(downloadsPath + "/$fileName");
+        Navigator.pop(context);
       });
     });
   }

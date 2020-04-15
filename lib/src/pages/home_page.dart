@@ -40,6 +40,8 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add), title: Text('Subí tu resumen')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.file_download), title: Text('Descargas')),
           ],
           onTap: _onItemTapped,
         ),
@@ -54,6 +56,17 @@ class _HomePageState extends State<HomePage> {
         widget.title = 'Universidades';
       } else {
         widget.title = 'Subí tu resumen';
+      }
+      switch (_selectedBottomIndex) {
+        case 0:
+          widget.title = 'Universidades';
+          break;
+        case 1:
+          widget.title = 'Subí tu resumen';
+          break;
+        case 2:
+          widget.title = 'Resúmenes descargados';
+          break;
       }
     });
   }
@@ -70,6 +83,11 @@ class _HomePageState extends State<HomePage> {
             // width: MediaQuery.of(context).size.width,
             // height: (MediaQuery.of(context).size.height) * 0.7,
             child: UploadPage(null));
+      case 2:
+        return Container(
+          child: Text(
+              'Acá irían los resúmenes ya descargados con la opción de eliminar'),
+        );
     }
 
     return ListaUniversidadesWidget();
