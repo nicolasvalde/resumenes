@@ -16,7 +16,7 @@ class CustomTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+      padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
       child: Ink(
         decoration: BoxDecoration(
           color: Colors.blue,
@@ -36,6 +36,7 @@ class CustomTile extends StatelessWidget {
           },
           splashColor: Colors.white,
           child: GFListTile(
+            // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             titleText: nombreUniversidad,
             icon: Icon(Icons.arrow_forward_ios),
             avatar: GFAvatar(

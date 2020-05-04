@@ -21,10 +21,14 @@ class _ListaUniversidadesWidgetState extends State<ListaUniversidadesWidget> {
       future: menuProvider.cargarData(),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return ListView(
+        return Column(
           children: _listaItems(snapshot.data),
-          padding: EdgeInsets.symmetric(vertical: 20),
         );
+
+        // child: ListView(
+        //   children: _listaItems(snapshot.data),
+        //   padding: EdgeInsets.symmetric(vertical: 20),
+        // ),
       },
     );
   }

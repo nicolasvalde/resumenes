@@ -47,13 +47,13 @@ class _UploadPageState extends State<UploadPage> {
               children: <Widget>[
                 _autorTextField(),
                 _descripcionTextField(),
-                _yearCursadoTextField(),
+                _yearCursadoDropdown(),
                 _universidadesDropdown(),
                 _facultadesDropdown(),
                 _carrerasDropdown(),
                 _materiasDropdown(),
-                Expanded(flex: 25, child: _fileSection()),
-                Expanded(flex: 4, child: _uploadButton())
+                _fileSection(),
+                _uploadButton(),
               ],
             ),
           ),
@@ -78,8 +78,11 @@ class _UploadPageState extends State<UploadPage> {
   Widget _descripcionTextField() {
     return Center(
       child: TextField(
+        minLines: 1,
+        maxLines: 3,
         decoration: InputDecoration(
-            labelText: 'Una breve descripción de lo que estás subiendo'),
+          labelText: 'Descripción de lo que estás subiendo',
+        ),
         onChanged: (valor) {
           setState(() {
             _descripcion = valor;
@@ -89,19 +92,43 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  Widget _yearCursadoTextField() {
+  // Widget _yearCursadoTextField() {
+  //   return Center(
+  //     child: TextField(
+  //       inputFormatters: <TextInputFormatter>[
+  //         WhitelistingTextInputFormatter.digitsOnly
+  //       ],
+  //       keyboardType: TextInputType.number,
+  //       decoration:
+  //           InputDecoration(labelText: 'En qué año cursaste la materia?'),
+  //       onChanged: (valor) {
+  //         setState(() {
+  //           _yearCursado = valor;
+  //         });
+  //       },
+  //     ),
+  //   );
+  // }
+
+  Widget _yearCursadoDropdown() {
     return Center(
-      child: TextField(
-        inputFormatters: <TextInputFormatter>[
-          WhitelistingTextInputFormatter.digitsOnly
-        ],
-        keyboardType: TextInputType.number,
-        decoration:
-            InputDecoration(labelText: 'En qué año cursaste la materia?'),
-        onChanged: (valor) {
-          setState(() {
-            _yearCursado = valor;
-          });
+      child: FutureBuilder(
+        initialData: [],
+        future: menuProvider.yearsList(),
+        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return DropdownButton<dynamic>(
+            items: snapshot.data,
+            onChanged: (yearValue) {
+              // print("cacona: "+yearValue.toString());
+              setState(() {
+                _yearCursado = yearValue.toString();
+              });
+            },
+            isExpanded: true,
+            hint: Text("Año en que cursaste la materia"),
+            value: _yearCursado,
+          );
         },
       ),
     );
@@ -340,7 +367,6 @@ class _UploadPageState extends State<UploadPage> {
           body['facultad'] = _selectedFacultadValue;
           body['carrera'] = _selectedCarreraValue;
           body['materia'] = _selectedMateriaValue;
-          body['materia'] = _selectedMateriaValue;
           body['yearCursado'] = _yearCursado;
           await resumenesProvider.save(body, _filePath);
           showDialog(
@@ -349,7 +375,11 @@ class _UploadPageState extends State<UploadPage> {
                 // title: Text("Resumen guardado con éxito"),
                 content: Text("Resumen guardado con éxito"),
                 actions: <Widget>[
-                  FlatButton(onPressed: (){Navigator.pop(context);}, child: Text("Aceptar"))
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar"))
                 ],
               ));
           _alerta();

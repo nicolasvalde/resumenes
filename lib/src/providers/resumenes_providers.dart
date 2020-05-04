@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 
 class _ResumenesProvider {
-  String _url = '10.0.2.2:8080';
+  //String _url = '10.0.2.2:8080';
+   String _url = 'resumenes-sistemas-distribuido.herokuapp.com';
   // String _url = '192.168.1.2:8080';
 
   _ResumenesProvider() {}
@@ -20,8 +22,6 @@ class _ResumenesProvider {
         await http.get(url, headers: {"Accept": "application/json"});
 
     String source = Utf8Decoder().convert(respuesta.bodyBytes);
-
-    print(source);
 
     final decodedData = json.decode(source);
 
@@ -47,14 +47,28 @@ class _ResumenesProvider {
     return resumen;
   }
 
+  Future<List<Resumen>> getByParameters(Map<String, String> data) async {
+    final url = Uri.http(_url,
+        "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
+
+print("URL: "+url.hasEmptyPath.toString());
+
+    final respuesta =
+        await http.get(url, headers: {"Accept": "application/json"});
+
+    String source = Utf8Decoder().convert(respuesta.bodyBytes);
+
+    final decodedData = json.decode(source);
+
+    final resumenes = new Resumenes.fromJsonList(decodedData);
+
+    return resumenes.items;
+  }
+
   Future save(Map<String, String> data, String file) async {
     final url = Uri.http(_url, 'resumenes');
 
     var body = json.encode(data);
-
-    // final respuesta = await http.post(url,
-    // headers: {"Content-Type": "multipart/form-data"}, body: body);
-    // headers: {"Content-Type": "application/json"}, body: body);
 
     final respuesta = http.MultipartRequest('POST', url);
 
@@ -63,8 +77,6 @@ class _ResumenesProvider {
     respuesta.files.add(
       await http.MultipartFile.fromPath('file', file),
     );
-
-    print(respuesta.files[0]);
 
     await respuesta.send();
 

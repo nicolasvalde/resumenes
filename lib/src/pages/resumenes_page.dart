@@ -30,8 +30,14 @@ class _ResumenesPageState extends State<ResumenesPage> {
   }
 
   Widget _lista() {
+    Map<String, String> body = new Map();
+    body['universidad'] = widget.arguments['nombreUniversidad'];
+    body['facultad'] = widget.arguments['nombreFacultad'];
+    body['carrera'] = widget.arguments['nombreCarrera'];
+    body['materia'] = widget.arguments['nombreMateria'];
+
     return FutureBuilder(
-      future: resumenesProvider.getAll(),
+      future: resumenesProvider.getByParameters(body),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(

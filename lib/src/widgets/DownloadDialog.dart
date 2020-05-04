@@ -14,7 +14,7 @@ class DownloadDialog extends StatelessWidget {
     return AlertDialog(
       content: Column(
         children: <Widget>[
-          Text("La info bonita con la opción de descarga va acá"),
+          Text("La info del resumen con la opción de descarga va acá"),
           Text(resumen.descripcion),
           RaisedButton(
             child: Text("Descargar"),

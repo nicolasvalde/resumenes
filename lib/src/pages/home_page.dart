@@ -25,11 +25,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: _getSelectedScreen(),
       ),
       bottomNavigationBar: Container(
@@ -75,19 +77,16 @@ class _HomePageState extends State<HomePage> {
     switch (_selectedBottomIndex) {
       case 0:
         return Container(
-            // width: MediaQuery.of(context).size.width,
-            // height: (MediaQuery.of(context).size.height) * (0.70),
-            child: ListaUniversidadesWidget());
+          child: ListaUniversidadesWidget(),
+        );
       case 1:
         return Container(
-            // width: MediaQuery.of(context).size.width,
-            // height: (MediaQuery.of(context).size.height) * 0.7,
-            child: UploadPage(null));
-      case 2:
-        return Container(
-          child: Text(
-              'Acá irían los resúmenes ya descargados con la opción de eliminar'),
+          alignment: Alignment.bottomCenter,
+          child: UploadPage(null),
         );
+      case 2:
+        return Text(
+            'Acá irían los resúmenes ya descargados con la opción de eliminar');
     }
 
     return ListaUniversidadesWidget();
