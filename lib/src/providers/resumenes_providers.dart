@@ -10,7 +10,7 @@ import 'package:open_file/open_file.dart';
 
 class _ResumenesProvider {
   //String _url = '10.0.2.2:8080';
-   String _url = 'resumenes-sistemas-distribuido.herokuapp.com';
+  String _url = 'resumenes-sistemas-distribuido.herokuapp.com';
   // String _url = '192.168.1.2:8080';
 
   _ResumenesProvider() {}
@@ -51,7 +51,7 @@ class _ResumenesProvider {
     final url = Uri.http(_url,
         "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
 
-print("URL: "+url.hasEmptyPath.toString());
+    print("URL: " + url.hasEmptyPath.toString());
 
     final respuesta =
         await http.get(url, headers: {"Accept": "application/json"});

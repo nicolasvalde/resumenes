@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resumenes/src/pages/downloads_page.dart';
 import 'package:resumenes/src/pages/upload_page.dart';
 import 'package:resumenes/src/providers/menu_provider.dart';
 import 'package:resumenes/src/widgets/CustomTile.dart';
@@ -85,8 +86,9 @@ class _HomePageState extends State<HomePage> {
           child: UploadPage(null),
         );
       case 2:
-        return Text(
-            'Acá irían los resúmenes ya descargados con la opción de eliminar');
+        return Container(
+          child: DownloadsPage(),
+        );
     }
 
     return ListaUniversidadesWidget();
