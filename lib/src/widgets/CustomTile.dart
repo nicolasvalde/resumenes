@@ -38,7 +38,7 @@ class CustomTile extends StatelessWidget {
           child: GFListTile(
             // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             titleText: nombreUniversidad,
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: Icon(Icons.arrow_forward_ios, color: Colors.white,),
             avatar: GFAvatar(
               backgroundImage: AssetImage('assets/' + imagen),
               shape: GFAvatarShape.square,

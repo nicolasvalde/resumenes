@@ -92,45 +92,24 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  // Widget _yearCursadoTextField() {
-  //   return Center(
-  //     child: TextField(
-  //       inputFormatters: <TextInputFormatter>[
-  //         WhitelistingTextInputFormatter.digitsOnly
-  //       ],
-  //       keyboardType: TextInputType.number,
-  //       decoration:
-  //           InputDecoration(labelText: 'En qué año cursaste la materia?'),
-  //       onChanged: (valor) {
-  //         setState(() {
-  //           _yearCursado = valor;
-  //         });
-  //       },
-  //     ),
-  //   );
-  // }
-
   Widget _yearCursadoDropdown() {
-    return Center(
-      child: FutureBuilder(
-        initialData: [],
-        future: menuProvider.yearsList(),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          return DropdownButton<dynamic>(
-            items: snapshot.data,
-            onChanged: (yearValue) {
-              // print("cacona: "+yearValue.toString());
-              setState(() {
-                _yearCursado = yearValue.toString();
-              });
-            },
-            isExpanded: true,
-            hint: Text("Año en que cursaste la materia"),
-            value: _yearCursado,
-          );
-        },
-      ),
+    return FutureBuilder<List<DropdownMenuItem>>(
+      initialData: [],
+      future: menuProvider.yearsList(),
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return DropdownButton<dynamic>(
+          items: snapshot.data,
+          onChanged: (yearValue) {
+            setState(() {
+              _yearCursado = yearValue.toString();
+            });
+          },
+          isExpanded: true,
+          hint: Text("Año en que cursaste la materia"),
+          value: _yearCursado,
+        );
+      },
     );
   }
 
@@ -167,12 +146,13 @@ class _UploadPageState extends State<UploadPage> {
 
   Widget _facultadesDropdown() {
     if (_selectedUniversidadValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una universidadad'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una universidadad'),
+      //   ),
+      // );
     } else {
       return Center(
         child: FutureBuilder(
@@ -180,7 +160,7 @@ class _UploadPageState extends State<UploadPage> {
           future: facultadesProvider.cargarData(_selectedUniversidadValue),
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (!snapshot.hasData) return Container();
             return DropdownButton<dynamic>(
               isExpanded: true,
               hint: Text("Elegí una facultad"),
@@ -207,19 +187,21 @@ class _UploadPageState extends State<UploadPage> {
 
   Widget _carrerasDropdown() {
     if (_selectedUniversidadValue == null && _selectedFacultadValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una universidadad'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una universidadad'),
+      //   ),
+      // );
     } else if (_selectedFacultadValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una facultad'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una facultad'),
+      //   ),
+      // );
     } else {
       return Center(
         child: FutureBuilder(
@@ -228,7 +210,7 @@ class _UploadPageState extends State<UploadPage> {
               _selectedUniversidadValue, _selectedFacultadValue),
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (!snapshot.hasData) return Container();
             return DropdownButton<dynamic>(
               isExpanded: true,
               hint: Text("Elegí una carrera"),
@@ -241,7 +223,6 @@ class _UploadPageState extends State<UploadPage> {
               onChanged: (selectedValue) {
                 setState(() {
                   _selectedCarreraValue = selectedValue;
-
                   _selectedMateriaValue = null;
                 });
               },
@@ -255,26 +236,29 @@ class _UploadPageState extends State<UploadPage> {
 
   Widget _materiasDropdown() {
     if (_selectedUniversidadValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una universidadad'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una universidadad'),
+      //   ),
+      // );
     } else if (_selectedFacultadValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una facultad'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una facultad'),
+      //   ),
+      // );
     } else if (_selectedCarreraValue == null) {
-      return Center(
-        child: DropdownButton(
-          isExpanded: true,
-          hint: Text('Primero elegí una carrera'),
-        ),
-      );
+      return Container();
+      // return Center(
+      //   child: DropdownButton(
+      //     isExpanded: true,
+      //     hint: Text('Primero elegí una carrera'),
+      //   ),
+      // );
     } else {
       return Center(
         child: FutureBuilder(
@@ -283,7 +267,7 @@ class _UploadPageState extends State<UploadPage> {
               _selectedFacultadValue, _selectedCarreraValue),
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (!snapshot.hasData) return Container();
             return DropdownButton<dynamic>(
               isExpanded: true,
               hint: Text("Elegí una materia"),
@@ -307,20 +291,29 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _fileSection() {
-    if (_filePath == null) {
-      return Center(
-        child: RaisedButton(
-          child: Text('Seleccionar archivo',
-              style: TextStyle(color: Colors.white)),
-          onPressed: () async {
-            var path = await FilePicker.getFilePath(type: FileType.any);
-            setState(() {
-              _filePath = path;
-            });
-          },
-          color: Colors.blue,
-          splashColor: Colors.white,
-        ),
+    if (_selectedMateriaValue == null) {
+      return Container();
+    } else if (_filePath == null) {
+      return Column(
+        children: <Widget>[
+          Center(
+            child: RaisedButton(
+              child: Text('Seleccionar archivo',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () async {
+                var path = await FilePicker.getFilePath(type: FileType.any);
+                setState(() {
+                  _filePath = path;
+                });
+              },
+              color: Colors.blue,
+              splashColor: Colors.white,
+            ),
+          ),
+          Center(
+            child: Text("Tamaño máximo: 50 MB"),
+          ),
+        ],
       );
     } else if (_filePath != null) {
       return Center(
@@ -357,51 +350,83 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _uploadButton() {
-    return Center(
-      child: RaisedButton(
-        onPressed: () async {
-          Map<String, String> body = new Map();
-          body['autor'] = _autor;
-          body['descripcion'] = _descripcion;
-          body['universidad'] = _selectedUniversidadValue;
-          body['facultad'] = _selectedFacultadValue;
-          body['carrera'] = _selectedCarreraValue;
-          body['materia'] = _selectedMateriaValue;
-          body['yearCursado'] = _yearCursado;
-          await resumenesProvider.save(body, _filePath);
-          showDialog(
+    if (_filePath == null || _autor == null || _descripcion == null) {
+      return Container();
+    } else {
+      return Center(
+        child: RaisedButton(
+          onPressed: () async {
+            Map<String, String> body = new Map();
+            body['autor'] = _autor;
+            body['descripcion'] = _descripcion;
+            body['universidad'] = _selectedUniversidadValue;
+            body['facultad'] = _selectedFacultadValue;
+            body['carrera'] = _selectedCarreraValue;
+            body['materia'] = _selectedMateriaValue;
+            body['yearCursado'] = _yearCursado;
+            showDialog(
+              barrierDismissible: false,
               context: context,
-              child: AlertDialog(
-                // title: Text("Resumen guardado con éxito"),
-                content: Text("Resumen guardado con éxito"),
-                actions: <Widget>[
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar"))
-                ],
-              ));
-          _alerta();
-          setState(() {
-            _autor = "";
-            _descripcion = "";
-            _selectedUniversidadValue = null;
-            _selectedFacultadValue = null;
-            _selectedCarreraValue = null;
-            _selectedMateriaValue = null;
-            _yearCursado = null;
-            _filePath = null;
-          });
-        },
-        child: Text(
-          'Subir',
-          style: TextStyle(color: Colors.white),
+              builder: (context) {
+                return StatefulBuilder(builder: (context, setState) {
+                  return WillPopScope(
+                    onWillPop: () async => false,
+                    child: AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          CircularProgressIndicator(
+                            backgroundColor: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: Text("Subiendo archivo."),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+              },
+            );
+
+            await resumenesProvider.save(body, _filePath);
+
+            Future.sync(() => Navigator.pop(context));
+
+            showDialog(
+                context: context,
+                child: AlertDialog(
+                  content: Text("Resumen guardado con éxito"),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Aceptar"))
+                  ],
+                ));
+            _alerta();
+            setState(() {
+              _autor = "";
+              _descripcion = "";
+              _selectedUniversidadValue = null;
+              _selectedFacultadValue = null;
+              _selectedCarreraValue = null;
+              _selectedMateriaValue = null;
+              _yearCursado = null;
+              _filePath = null;
+            });
+          },
+          child: Text(
+            'Subir',
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.blue,
+          splashColor: Colors.white,
         ),
-        color: Colors.blue,
-        splashColor: Colors.white,
-      ),
-    );
+      );
+    }
   }
 
   Widget _alerta() {

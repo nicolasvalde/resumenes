@@ -52,17 +52,20 @@ class _ResumenesProvider {
         "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
 
     print("URL: " + url.hasEmptyPath.toString());
+    try {
+      final respuesta =
+          await http.get(url, headers: {"Accept": "application/json"});
 
-    final respuesta =
-        await http.get(url, headers: {"Accept": "application/json"});
+      String source = Utf8Decoder().convert(respuesta.bodyBytes);
 
-    String source = Utf8Decoder().convert(respuesta.bodyBytes);
+      final decodedData = json.decode(source);
 
-    final decodedData = json.decode(source);
+      final resumenes = new Resumenes.fromJsonList(decodedData);
 
-    final resumenes = new Resumenes.fromJsonList(decodedData);
-
-    return resumenes.items;
+      return resumenes.items;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future save(Map<String, String> data, String file) async {

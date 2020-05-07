@@ -40,10 +40,24 @@ class _ResumenesPageState extends State<ResumenesPage> {
       future: resumenesProvider.getByParameters(body),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return ListView(
-          children: _listaItems(snapshot.data),
-          padding: EdgeInsets.symmetric(vertical: 20),
-        );
+        if (snapshot.connectionState != ConnectionState.done) {
+          return CircularProgressIndicator(backgroundColor: Colors.grey);
+        } else {
+          if (snapshot.hasData) {
+            if (snapshot.data.length == 0) {
+              return Text("Todavía no hay resúmenes");
+            } else {
+              return ListView(
+                children: _listaItems(snapshot.data),
+                padding: EdgeInsets.symmetric(vertical: 20),
+              );
+            }
+          } else {
+            return Container(
+              child: Text('Hay un error en la red'),
+            );
+          }
+        }
       },
     );
   }

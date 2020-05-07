@@ -16,7 +16,7 @@ class _MenuProvider {
     return universidades;
   }
 
-  Future<List<dynamic>> yearsList() async {
+  Future<List<DropdownMenuItem>> yearsList() async {
     List<DropdownMenuItem> years = new List();
 
     var date = new DateTime.now();
