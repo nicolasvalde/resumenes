@@ -11,29 +11,48 @@ class DownloadsPage extends StatefulWidget {
 class _DownloadsPageState extends State<DownloadsPage> {
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Eliminá un archivo deslizándolo hacia la derecha"),
-              duration: new Duration(milliseconds: 1500),
-            ),
-          )
-        });
     return Container(
       child: FutureBuilder<List<FileSystemEntity>>(
-        future: downloadsProvider.list(),
-        initialData: [],
-        builder: (BuildContext context,
-            AsyncSnapshot<List<FileSystemEntity>> snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return CircularProgressIndicator(backgroundColor: Colors.grey);
-          } else {
-            return Column(
-              children: _listaItems(snapshot.data),
-            );
+          future: downloadsProvider.list(),
+          initialData: [],
+          builder: (BuildContext context,
+              AsyncSnapshot<List<FileSystemEntity>> snapshot) {
+            // if (snapshot.connectionState != ConnectionState.done) {
+            //   return Center(
+            //     child: CircularProgressIndicator(backgroundColor: Colors.grey),
+            //   );
+            // } else {
+            if (snapshot.data.length == 0) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: (MediaQuery.of(context).size.height) / 2),
+                    child: Center(
+                      child: Text("Todavía no bajaste ningún archivo"),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              WidgetsBinding.instance.addPostFrameCallback((_) => {
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            "Eliminá un archivo deslizándolo hacia la derecha"),
+                        duration: new Duration(milliseconds: 1500),
+                      ),
+                    )
+                  });
+
+              return Column(
+                children: _listaItems(snapshot.data),
+              );
+            }
           }
-        },
-      ),
+          // },
+          ),
     );
   }
 
@@ -42,12 +61,15 @@ class _DownloadsPageState extends State<DownloadsPage> {
 
     if (data != null) {
       data.forEach((file) {
+        var size = new File(file.path).lengthSync() / 1024 / 1024;
         final cardTemp = new Card(
           child: Dismissible(
             background: Container(
-              child: ListTile(
-                leading: Icon(Icons.delete),
-                title: Text("Eliminar"),
+              child: Center(
+                child: ListTile(
+                  leading: Icon(Icons.delete),
+                  title: Text("Eliminar"),
+                ),
               ),
               color: Colors.redAccent,
             ),
@@ -78,21 +100,16 @@ class _DownloadsPageState extends State<DownloadsPage> {
                   height: 45.0,
                   width: 45.0,
                 ),
-
-                // CircleAvatar(
-                //   backgroundColor: Colors.transparent,
-                //   backgroundImage: AssetImage('assets/icons/' +
-                //       file.path.substring(file.path.lastIndexOf('.') + 1) +
-                //       '.png'),
-                // ),
                 title: Text(file.path.substring(file.path.lastIndexOf("/") + 1,
                     file.path.lastIndexOf('.'))),
+                subtitle: Text(size.toStringAsFixed(
+                        size.truncateToDouble() == size ? 0 : 2) +
+                    " Mb"),
                 // subtitle: Text(file.parent.toString()),
               ),
             ),
           ),
         );
-
         archivos.add(cardTemp);
       });
     }

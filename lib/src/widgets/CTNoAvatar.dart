@@ -90,7 +90,10 @@ class CustomTileNoAvatar extends StatelessWidget {
           splashColor: Colors.white,
           child: GFListTile(
             titleText: nombreMostrar,
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
             // avatar: GFAvatar(
             //   backgroundImage: AssetImage('assets/' + imagen),
             //   shape: GFAvatarShape.square,

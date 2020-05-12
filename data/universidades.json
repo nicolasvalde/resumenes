@@ -13,6 +13,7 @@
                             "id": "cpn",
                             "nombre": "Contador Público Nacional",
                             "materias": [
+
                                 {
                                     "nombre": "Contabilidad Básica"
                                 },
@@ -20,10 +21,107 @@
                                     "nombre": "Introducción a la economía I"
                                 },
                                 {
+                                    "nombre": "Introducción a la economía II"
+                                },
+                                {
                                     "nombre": "Cálculo"
                                 },
                                 {
+                                    "nombre": "Derecho Público"
+                                },
+                                {
+                                    "nombre": "Derecho Privado I"
+                                },
+                                
+                                {
                                     "nombre": "Elementos de administración"
+                                },
+                                {
+                                    "nombre": "Contabilidad de Costo"
+                                },
+                                {
+                                    "nombre": "Comportamiento Organizacional"
+                                },
+                                {
+                                    "nombre": "Derecho Privado II"
+                                },
+                                {
+                                    "nombre": "Derecho Laboral y Administración del Personal"
+                                },
+                                {
+                                    "nombre": "Estadística"
+                                },
+                                {
+                                    "nombre": "Inglés Técnico I"
+                                },
+                                {
+                                    "nombre": "Introducción al Álgebra Lineal"
+                                },
+                                {
+                                    "nombre": "Introducción a la Filosofía Social y Política"
+                                },
+
+                                {
+                                    "nombre": "Derecho Privado III"
+                                },
+                                {
+                                    "nombre": "Contabilidad Superior"
+                                },
+                                {
+                                    "nombre": "Finanzas Públicas"
+                                },
+                                {
+                                    "nombre": "Derecho Sucerio"
+                                },
+                                {
+                                    "nombre": "Inglés Técnico II"
+                                },
+                                {
+                                    "nombre": "Matemática Financiera"
+                                },
+                                {
+                                    "nombre": "Sistemas Administrativos de Información Contable"
+                                },
+
+                                {
+                                    "nombre": "Control de Gestión"
+                                },
+                                {
+                                    "nombre": "Contabilidad Avanzada"
+                                },
+                                {
+                                    "nombre": "Derecho Consursal"
+                                },
+                                {
+                                    "nombre": "Costos para la Gestión"
+                                },
+                                {
+                                    "nombre": "Teoría y Técnica Impositiva I"
+                                },
+                                {
+                                    "nombre": "Teoría y Técnica Impositiva II"
+                                },
+
+                                {
+                                    "nombre": "Administración y Contabilidad en la Hacienda"
+                                },
+                                {
+                                    "nombre": "Administración Financiera"
+                                },
+                                {
+                                    "nombre": "Auditoría"
+                                },
+                                {
+                                    "nombre": "Auditoría Operativa y de Sistemas Computarizados"
+                                },
+                                {
+                                    "nombre": "Metodología y Trabajo de Investigación"
+                                },
+                                {
+                                    "nombre": "Práctica Profesional"
+                                },
+                                {
+                                    "nombre": "Operatoria de Comercio Exterior"
                                 }
                             ]
                         },
@@ -55,7 +153,7 @@
                         {
                             "id": "inf",
                             "nombre": "Lic. en Informática y Desarrollo de Software",
-                            "materias":[
+                            "materias": [
                                 {
                                     "nombre": "Matemática"
                                 }
@@ -88,12 +186,12 @@
             ]
         },
         {
-            "id":"maza",
+            "id": "maza",
             "nombre": "Universidad Juan Agustín Maza",
             "imagen": "logoMaza.png"
         },
         {
-            "id":"congreso",
+            "id": "congreso",
             "nombre": "Universidad de Congreso",
             "imagen": "logoCongreso.png"
         }

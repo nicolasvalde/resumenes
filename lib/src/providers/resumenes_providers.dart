@@ -11,7 +11,7 @@ import 'package:open_file/open_file.dart';
 class _ResumenesProvider {
   //String _url = '10.0.2.2:8080';
   String _url = 'resumenes-sistemas-distribuido.herokuapp.com';
-  // String _url = '192.168.1.2:8080';
+  // String _url = '10.0.2.2:5000';
 
   _ResumenesProvider() {}
 
@@ -73,17 +73,19 @@ class _ResumenesProvider {
 
     var body = json.encode(data);
 
-    final respuesta = http.MultipartRequest('POST', url);
+    final request = http.MultipartRequest('POST', url);
 
-    respuesta.fields['resumen'] = body;
+    request.fields['resumen'] = body;
 
-    respuesta.files.add(
+    request.files.add(
       await http.MultipartFile.fromPath('file', file),
     );
 
-    await respuesta.send();
+    await request.send();
 
-    return respuesta;
+    print(request.fields);
+
+    return request;
   }
 
   update() {}

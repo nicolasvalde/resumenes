@@ -48,7 +48,7 @@ class _CarrerasPageState extends State<CarrerasPage> {
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
           children: _listaItems(snapshot.data),
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: 8),
         );
       },
     );

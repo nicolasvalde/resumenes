@@ -49,7 +49,7 @@ class _ResumenesPageState extends State<ResumenesPage> {
             } else {
               return ListView(
                 children: _listaItems(snapshot.data),
-                padding: EdgeInsets.symmetric(vertical: 20),
+                // padding: EdgeInsets.symmetric(vertical: 20),
               );
             }
           } else {

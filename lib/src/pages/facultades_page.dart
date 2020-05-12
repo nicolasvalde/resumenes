@@ -15,14 +15,6 @@ class FacultadesPage extends StatefulWidget {
 }
 
 class _FacultadesPageState extends State<FacultadesPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +32,6 @@ class _FacultadesPageState extends State<FacultadesPage> {
   }
 
   Widget _lista() {
-
     print(widget.arguments);
 
     return FutureBuilder(
@@ -51,7 +42,7 @@ class _FacultadesPageState extends State<FacultadesPage> {
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
           children: _listaItems(snapshot.data),
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: 8),
         );
       },
     );

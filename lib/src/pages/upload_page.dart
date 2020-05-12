@@ -364,6 +364,7 @@ class _UploadPageState extends State<UploadPage> {
             body['carrera'] = _selectedCarreraValue;
             body['materia'] = _selectedMateriaValue;
             body['yearCursado'] = _yearCursado;
+            body['fileName'] = _filePath.split("/").last;
             showDialog(
               barrierDismissible: false,
               context: context,

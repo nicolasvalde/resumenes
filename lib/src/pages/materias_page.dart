@@ -49,7 +49,7 @@ class _MateriasPageState extends State<MateriasPage> {
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
           children: _listaItems(snapshot.data),
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: 8),
         );
       },
     );
@@ -58,6 +58,9 @@ class _MateriasPageState extends State<MateriasPage> {
   List<Widget> _listaItems(List<dynamic> data) {
     final List<Widget> materias = [];
     if (data != null) {
+      data.sort((m1, m2) {
+        m2["nombre"].compareTo(m1["nombre"]);
+      });
       data.forEach((m) {
         final widgetTemp = CustomTileNoAvatar('materias',
             nombreUniversidad: widget.arguments['nombreUniversidad'],

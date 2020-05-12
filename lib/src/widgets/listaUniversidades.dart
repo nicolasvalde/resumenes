@@ -24,11 +24,6 @@ class _ListaUniversidadesWidgetState extends State<ListaUniversidadesWidget> {
         return Column(
           children: _listaItems(snapshot.data),
         );
-
-        // child: ListView(
-        //   children: _listaItems(snapshot.data),
-        //   padding: EdgeInsets.symmetric(vertical: 20),
-        // ),
       },
     );
   }
@@ -39,7 +34,6 @@ class _ListaUniversidadesWidgetState extends State<ListaUniversidadesWidget> {
     data.forEach((u) {
       final widgetTemp = CustomTile(u['nombre'], u['imagen']);
       universidades.add(widgetTemp);
-      // universidades.add(Divider());
     });
 
     return universidades;

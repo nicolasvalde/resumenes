@@ -45,7 +45,7 @@ class Resumen {
     materia     = json['materia'];
     fechaSubida = json['fechaSubida'];
     descripcion = json['descripcion'];
-    fileName = json['fileName'];
+    fileName    = json['fileName'];
     yearCursado = json['yearCursado'];
   }
 }
