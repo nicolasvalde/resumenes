@@ -1,9 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-file_picker=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\file_picker-1.6.2\\
-flutter_plugin_android_lifecycle=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.6\\
+file_picker=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\file_picker-1.9.0+1\\
+flutter_plugin_android_lifecycle=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.7\\
 open_file=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\open_file-3.0.1\\
-path_provider=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.5\\
-path_provider_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4\\
-url_launcher=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher-5.4.2\\
-url_launcher_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_macos-0.0.1+4\\
-url_launcher_web=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_web-0.1.1+1\\
+path_provider=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.8\\
+path_provider_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+2\\
+url_launcher=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher-5.4.7\\
+url_launcher_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_macos-0.0.1+5\\
+url_launcher_web=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\url_launcher_web-0.1.1+5\\

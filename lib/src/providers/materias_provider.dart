@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
@@ -33,6 +35,14 @@ class _MateriasProvider {
           });
         }
       });
+    }
+    // final sorted = new SplayTreeMap.from(
+    //     testMap,
+    //     (a, b) => int.parse(testMap[a]['order'])
+    //         .compareTo(int.parse(testMap[b]['order'])));
+
+    if (materias != null) {
+      materias.sort((m1, m2) => m1["nombre"].compareTo(m2["nombre"]));
     }
 
     return materias;

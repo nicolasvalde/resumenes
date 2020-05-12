@@ -58,9 +58,6 @@ class _MateriasPageState extends State<MateriasPage> {
   List<Widget> _listaItems(List<dynamic> data) {
     final List<Widget> materias = [];
     if (data != null) {
-      data.sort((m1, m2) {
-        m2["nombre"].compareTo(m1["nombre"]);
-      });
       data.forEach((m) {
         final widgetTemp = CustomTileNoAvatar('materias',
             nombreUniversidad: widget.arguments['nombreUniversidad'],
