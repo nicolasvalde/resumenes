@@ -45,7 +45,7 @@ class _ResumenesPageState extends State<ResumenesPage> {
         } else {
           if (snapshot.hasData) {
             if (snapshot.data.length == 0) {
-              return Text("Todavía no hay resúmenes");
+              return Text("Todavía no hay apuntes");
             } else {
               return ListView(
                 children: _listaItems(snapshot.data),

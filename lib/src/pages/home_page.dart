@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedBottomIndex,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('Explorar resúmenes')),
+                icon: Icon(Icons.search), title: Text('Explorar apuntes')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add), title: Text('Subí tu resumen')),
+                icon: Icon(Icons.add), title: Text('Subí tu apunte')),
             BottomNavigationBarItem(
                 icon: Icon(Icons.file_download), title: Text('Descargas')),
           ],
@@ -65,10 +65,10 @@ class _HomePageState extends State<HomePage> {
           widget.title = 'Universidades';
           break;
         case 1:
-          widget.title = 'Subí tu resumen';
+          widget.title = 'Subí tu apunte';
           break;
         case 2:
-          widget.title = 'Resúmenes descargados';
+          widget.title = 'Apuntes descargados';
           break;
       }
     });

@@ -26,6 +26,9 @@ class _UploadPageState extends State<UploadPage> {
 
   String _filePath;
 
+  final _controllerAutor = TextEditingController();
+  final _controllerDescripcion = TextEditingController();
+
   // List listUniversidades = ['Elegí una universidad'];
   // List listFacultades = ['Elegí una facultad'];
   // List listCarreras = ['Elegí una carrera'];
@@ -34,6 +37,32 @@ class _UploadPageState extends State<UploadPage> {
   @override
   void initState() {
     super.initState();
+    _controllerAutor.addListener(() {
+      final text = _controllerAutor.text;
+      _controllerAutor.value = _controllerAutor.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    _controllerDescripcion.addListener(() {
+      final text = _controllerDescripcion.text;
+      _controllerDescripcion.value = _controllerDescripcion.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controllerAutor.dispose();
+    _controllerDescripcion.dispose();
+    super.dispose();
   }
 
   @override
@@ -65,6 +94,8 @@ class _UploadPageState extends State<UploadPage> {
   Widget _autorTextField() {
     return Center(
       child: TextField(
+        controller: _controllerAutor,
+        textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(labelText: 'Tu nombre o apodo'),
         onChanged: (valor) {
           setState(() {
@@ -78,6 +109,9 @@ class _UploadPageState extends State<UploadPage> {
   Widget _descripcionTextField() {
     return Center(
       child: TextField(
+        controller: _controllerDescripcion,
+        textCapitalization: TextCapitalization.sentences,
+        autofocus: false,
         minLines: 1,
         maxLines: 3,
         decoration: InputDecoration(
@@ -101,6 +135,7 @@ class _UploadPageState extends State<UploadPage> {
         return DropdownButton<dynamic>(
           items: snapshot.data,
           onChanged: (yearValue) {
+            FocusScope.of(context).requestFocus(new FocusNode());
             setState(() {
               _yearCursado = yearValue.toString();
             });
@@ -130,6 +165,7 @@ class _UploadPageState extends State<UploadPage> {
                     ))
                 .toList(),
             onChanged: (selectedValue) {
+              FocusScope.of(context).requestFocus(new FocusNode());
               setState(() {
                 _selectedUniversidadValue = selectedValue;
                 _selectedFacultadValue = null;
@@ -171,6 +207,7 @@ class _UploadPageState extends State<UploadPage> {
                       ))
                   .toList(),
               onChanged: (selectedValue) {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 setState(() {
                   _selectedFacultadValue = selectedValue;
                   _selectedCarreraValue = null;
@@ -221,6 +258,7 @@ class _UploadPageState extends State<UploadPage> {
                       ))
                   .toList(),
               onChanged: (selectedValue) {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 setState(() {
                   _selectedCarreraValue = selectedValue;
                   _selectedMateriaValue = null;
@@ -278,6 +316,7 @@ class _UploadPageState extends State<UploadPage> {
                       ))
                   .toList(),
               onChanged: (selectedValue) {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 setState(() {
                   _selectedMateriaValue = selectedValue;
                 });
@@ -407,10 +446,12 @@ class _UploadPageState extends State<UploadPage> {
                         child: Text("Aceptar"))
                   ],
                 ));
-            _alerta();
+            // _alerta();
             setState(() {
-              _autor = "";
-              _descripcion = "";
+              // _autor = "";
+              // _descripcion = "";
+              _controllerAutor.clear();
+              _controllerDescripcion.clear();
               _selectedUniversidadValue = null;
               _selectedFacultadValue = null;
               _selectedCarreraValue = null;
@@ -430,9 +471,9 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  Widget _alerta() {
-    return AlertDialog(
-      title: Text("Resumen guardado con éxito"),
-    );
-  }
+  // Widget _alerta() {
+  //   return AlertDialog(
+  //     title: Text("Resumen guardado con éxito"),
+  //   );
+  // }
 }
