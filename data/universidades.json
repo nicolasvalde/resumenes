@@ -13,7 +13,6 @@
                             "id": "cpn",
                             "nombre": "Contador Público Nacional",
                             "materias": [
-
                                 {
                                     "nombre": "Contabilidad Básica"
                                 },
@@ -32,7 +31,6 @@
                                 {
                                     "nombre": "Derecho Privado I"
                                 },
-                                
                                 {
                                     "nombre": "Elementos de administración"
                                 },
@@ -60,7 +58,6 @@
                                 {
                                     "nombre": "Introducción a la Filosofía Social y Política"
                                 },
-
                                 {
                                     "nombre": "Derecho Privado III"
                                 },
@@ -82,7 +79,6 @@
                                 {
                                     "nombre": "Sistemas Administrativos de Información Contable"
                                 },
-
                                 {
                                     "nombre": "Control de Gestión"
                                 },
@@ -101,7 +97,6 @@
                                 {
                                     "nombre": "Teoría y Técnica Impositiva II"
                                 },
-
                                 {
                                     "nombre": "Administración y Contabilidad en la Hacienda"
                                 },
@@ -156,6 +151,99 @@
                             "materias": [
                                 {
                                     "nombre": "Matemática"
+                                },
+                                {
+                                    "nombre": "Programación I"
+                                },
+                                {
+                                    "nombre": "Arquitectura de Computadoras I"
+                                },
+                                {
+                                    "nombre": "Laboratorio I"
+                                },
+                                {
+                                    "nombre": "Análisis Matemático I"
+                                },
+                                {
+                                    "nombre": "Programación II"
+                                },
+                                {
+                                    "nombre": "Arquitectura de Computadoras II"
+                                },
+                                {
+                                    "nombre": "Laboratorio II"
+                                },
+                                {
+                                    "nombre": "Análisis Matemático II"
+                                },
+                                {
+                                    "nombre": "Sistemas de Comunicaciones"
+                                },
+                                {
+                                    "nombre": "Diseño I"
+                                },
+                                {
+                                    "nombre": "Laboratorio III"
+                                },
+                                {
+                                    "nombre": "Estadística"
+                                },
+                                {
+                                    "nombre": "Laboratorio IV"
+                                },
+                                {
+                                    "nombre": "Base de datos"
+                                },
+                                {
+                                    "nombre": "Diseño II"
+                                },
+                                {
+                                    "nombre": "Programación Avanzada"
+                                },
+                                {
+                                    "nombre": "Investigación Operativa"
+                                },
+                                {
+                                    "nombre": "Autómatas y Lenguajes"
+                                },
+                                {
+                                    "nombre": "Sistemas Inteligentes"
+                                },
+                                {
+                                    "nombre": "Compiladores"
+                                },
+                                {
+                                    "nombre": "Seguridad"
+                                },
+                                {
+                                    "nombre": "Ingeniería del conocimiento"
+                                },
+                                {
+                                    "nombre": "Comercialización de Servicios"
+                                },
+                                {
+                                    "nombre": "Practica integradora"
+                                },
+                                {
+                                    "nombre": "Ingeniería del Software"
+                                },
+                                {
+                                    "nombre": "Simulación"
+                                },
+                                {
+                                    "nombre": "Base de Datos avanzada"
+                                },
+                                {
+                                    "nombre": "Sistemas distribuidos"
+                                },
+                                {
+                                    "nombre": "Derecho Informático y Ética Profesional"
+                                },
+                                {
+                                    "nombre": "Evaluación de Proyectos"
+                                },
+                                {
+                                    "nombre": "Práctica Profesional"
                                 }
                             ]
                         }
@@ -179,7 +267,159 @@
                     "carreras": [
                         {
                             "id": "psi",
-                            "nombre": "Licenciatura en Psicología"
+                            "nombre": "Licenciatura en Psicología",
+                            "materias": [
+                                {
+                                    "nombre": "Introducción a la Psicología General"
+                                },
+                                {
+                                    "nombre": "Psicología de la Niñez"
+                                },
+                                {
+                                    "nombre": "Neurociencias I"
+                                },
+                                {
+                                    "nombre": "Historia de la Cultura"
+                                },
+                                {
+                                    "nombre": "Filosofía y Antropología"
+                                },
+                                {
+                                    "nombre": "Psicología General"
+                                },
+                                {
+                                    "nombre": "Psicología de la Adolescencia"
+                                },
+                                {
+                                    "nombre": "Neurociencias II"
+                                },
+                                {
+                                    "nombre": "Introducción a la Sociología"
+                                },
+                                {
+                                    "nombre": "Seminario I"
+                                },
+                                {
+                                    "nombre": "Psicoanálisis I"
+                                },
+                                {
+                                    "nombre": "Psicología de la Familia y las Instituciones"
+                                },
+                                {
+                                    "nombre": "Psicología de la Vida Adulta y de la Vejez"
+                                },
+                                {
+                                    "nombre": "Psicología de la Personalidad"
+                                },
+                                {
+                                    "nombre": "Ética y sus Fundamentos"
+                                },
+                                {
+                                    "nombre": "Psicoanálisis II"
+                                },
+                                {
+                                    "nombre": "Metodología de la Investigación I"
+                                },
+                                {
+                                    "nombre": "Psicología de la Salud y Salud Pública"
+                                },
+                                {
+                                    "nombre": "Psicología Social y Comunitaria"
+                                },
+                                {
+                                    "nombre": "Neuropsicología Cognitiva"
+                                },
+                                {
+                                    "nombre": "Seminario II"
+                                },
+                                {
+                                    "nombre": "Orientaciones Actuales de la Psicología I"
+                                },
+                                {
+                                    "nombre": "Psicopatología I"
+                                },
+                                {
+                                    "nombre": "Estadística Aplicada a la Psicología"
+                                },
+                                {
+                                    "nombre": "Ejercicio Profesional"
+                                },
+                                {
+                                    "nombre": "Introducción a la Teología"
+                                },
+                                {
+                                    "nombre": "Orientaciones Actuales de la Psicología II"
+                                },
+                                {
+                                    "nombre": "Psicopatología II"
+                                },
+                                {
+                                    "nombre": "Psicología Educacional"
+                                },
+                                {
+                                    "nombre": "Técnicas de Evaluación Psicológica I"
+                                },
+                                {
+                                    "nombre": "Psicología Laboral-Organizacional"
+                                },
+                                {
+                                    "nombre": "Seminario III"
+                                },
+                                {
+                                    "nombre": "Psicología Clínica de la Niñez y Adolescencia I"
+                                },
+                                {
+                                    "nombre": "Técnicas de Evaluación Psicológica II"
+                                },
+                                {
+                                    "nombre": "Psicología Jurídico-Forense"
+                                },
+                                {
+                                    "nombre": "Metodología de la Investigación II"
+                                },
+                                {
+                                    "nombre": "Síntesis Teológica"
+                                },
+                                {
+                                    "nombre": "Psicología Clínica de la Niñez y Adolescencia II"
+                                },
+                                {
+                                    "nombre": "Técnicas de Evaluación Psicológica III"
+                                },
+                                {
+                                    "nombre": "Psicoterapias"
+                                },
+                                {
+                                    "nombre": "Seminario de Integración Filosófico-Psicológico"
+                                },
+                                {
+                                    "nombre": "Seminario IV"
+                                },
+                                {
+                                    "nombre": "Psicología Clínica del Adulto, Geronte y Familia I"
+                                },
+                                {
+                                    "nombre": "Rorschach I"
+                                },
+                                {
+                                    "nombre": "Taller de Integración Final"
+                                },
+                                {
+                                    "nombre": "Moral y Compromiso Social"
+                                },
+                                {
+                                    "nombre": "Psicología Clínica del Adulto, Geronte y Familia II"
+                                },
+                                {
+                                    "nombre": "Orientación Vocacional - Ocupacional"
+                                },
+                                {
+                                    "nombre": "Integración Psicodiagnóstica"
+                                },
+                                {
+                                    "nombre": "Seminario V"
+                                }
+                            ]
                         }
                     ]
                 }
