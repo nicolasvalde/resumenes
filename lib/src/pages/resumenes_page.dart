@@ -31,10 +31,11 @@ class _ResumenesPageState extends State<ResumenesPage> {
 
   Widget _lista() {
     Map<String, String> body = new Map();
-    body['universidad'] = widget.arguments['nombreUniversidad'];
-    body['facultad'] = widget.arguments['nombreFacultad'];
-    body['carrera'] = widget.arguments['nombreCarrera'];
-    body['materia'] = widget.arguments['nombreMateria'];
+    body['idMateria'] = widget.arguments['idMateria'].toString();
+    // body['universidad'] = widget.arguments['nombreUniversidad'];
+    // body['facultad'] = widget.arguments['nombreFacultad'];
+    // body['carrera'] = widget.arguments['nombreCarrera'];
+    // body['materia'] = widget.arguments['nombreMateria'];
 
     return FutureBuilder(
       future: resumenesProvider.getByParameters(body),

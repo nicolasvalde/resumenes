@@ -2,22 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:getflutter/components/list_tile/gf_list_tile.dart';
 import 'package:getflutter/getflutter.dart';
 
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+import 'dart:async'; //probar a borrar despues
+
 class CustomTileNoAvatar extends StatelessWidget {
+  int universidadId;
   String nombreUniversidad;
+  int idFacultad;
   String nombreFacultad;
+  int idCarrera;
   String nombreCarrera;
+  int idMateria;
   String nombreMateria;
   String origen;
   String nombreMostrar;
 
-  CustomTileNoAvatar(String origen,
-      {String nombreUniversidad,
+  CustomTileNoAvatar(
+    String origen, {
+      String nombreUniversidad,
+      int idFacultad,
       String nombreFacultad,
+      int idCarrera,
       String nombreCarrera,
-      String nombreMateria}) {
+      int idMateria,
+      String nombreMateria
+  }) {
     this.nombreUniversidad = nombreUniversidad;
-    this.nombreFacultad = nombreFacultad;
+    this.idFacultad = idFacultad;
+    this.nombreFacultad =  nombreFacultad;
+    this.idCarrera = idCarrera;
     this.nombreCarrera = nombreCarrera;
+    this.idMateria = idMateria;
     this.nombreMateria = nombreMateria;
     this.origen = origen;
   }
@@ -62,7 +79,7 @@ class CustomTileNoAvatar extends StatelessWidget {
               case 'facultades':
                 {
                   Navigator.pushNamed(context, 'carreras', arguments: {
-                    'nombreUniversidad': nombreUniversidad,
+                    'idFacultad': idFacultad,
                     'nombreFacultad': nombreFacultad
                   });
                 }
@@ -70,8 +87,7 @@ class CustomTileNoAvatar extends StatelessWidget {
               case 'carreras':
                 {
                   Navigator.pushNamed(context, 'materias', arguments: {
-                    'nombreUniversidad': nombreUniversidad,
-                    'nombreFacultad': nombreFacultad,
+                    'idCarrera': idCarrera,
                     'nombreCarrera': nombreCarrera
                   });
                 }
@@ -79,9 +95,7 @@ class CustomTileNoAvatar extends StatelessWidget {
               case 'materias':
                 {
                   Navigator.pushNamed(context, 'resumenes', arguments: {
-                    'nombreUniversidad': nombreUniversidad,
-                    'nombreFacultad': nombreFacultad,
-                    'nombreCarrera': nombreCarrera,
+                    'idMateria': idMateria,
                     'nombreMateria': nombreMateria
                   });
                 }
@@ -104,4 +118,27 @@ class CustomTileNoAvatar extends StatelessWidget {
       ),
     );
   }
+}
+
+_getData(String origen, int param) async {
+  var dbDir = await getDatabasesPath();
+  var dbPath = join(dbDir, "app.db");
+
+  final Database db = await openDatabase(dbPath);
+
+  final List<Map<String, dynamic>> data = await db.query(
+      origen.toUpperCase(),
+      where: origen.substring(0, 1) + '_fk = ?',
+      whereArgs: [param.toString()]);
+
+  print(data);
+
+  if(origen.compareTo('materias') == 0) {
+    final List<Map<String, dynamic>> materiasClone = new List.from(data);
+    await db.close();
+    return materiasClone;
+  }
+  await db.close();
+
+  return data;
 }

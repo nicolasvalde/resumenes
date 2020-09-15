@@ -42,8 +42,7 @@ class _CarrerasPageState extends State<CarrerasPage> {
   Widget _lista() {
     print(widget.arguments);
     return FutureBuilder(
-      future: carrerasProvider.cargarData(widget.arguments['nombreUniversidad'],
-          widget.arguments['nombreFacultad']),
+      future: carrerasProvider.cargarData(widget.arguments['idFacultad']),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
@@ -59,9 +58,8 @@ class _CarrerasPageState extends State<CarrerasPage> {
     if (data != null) {
       data.forEach((c) {
         final widgetTemp = CustomTileNoAvatar('carreras',
-            nombreUniversidad: widget.arguments['nombreUniversidad'],
-            nombreFacultad: widget.arguments['nombreFacultad'],
-            nombreCarrera: c['nombre']);
+            nombreCarrera: c['nombre'],
+            idCarrera: c['id']);
         carreras.add(widgetTemp);
         // carreras.add(Divider());
       });

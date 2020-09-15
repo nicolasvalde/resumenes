@@ -10,6 +10,7 @@ class ListaUniversidadesWidget extends StatefulWidget {
 }
 
 class _ListaUniversidadesWidgetState extends State<ListaUniversidadesWidget> {
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +33,7 @@ class _ListaUniversidadesWidgetState extends State<ListaUniversidadesWidget> {
     final List<Widget> universidades = [];
 
     data.forEach((u) {
-      final widgetTemp = CustomTile(u['nombre'], u['imagen']);
+      final widgetTemp = CustomTile(u['id'], u['nombre'], u['imagen']);
       universidades.add(widgetTemp);
     });
 

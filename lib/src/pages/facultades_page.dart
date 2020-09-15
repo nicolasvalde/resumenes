@@ -37,7 +37,7 @@ class _FacultadesPageState extends State<FacultadesPage> {
     return FutureBuilder(
       // Busca las facultades de acuerdo a argument (nombre de la universidad)
       future:
-          facultadesProvider.cargarData(widget.arguments['nombreUniversidad']),
+          facultadesProvider.cargarData(widget.arguments['idUniversidad']),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
@@ -54,6 +54,7 @@ class _FacultadesPageState extends State<FacultadesPage> {
       data.forEach((f) {
         final widgetTemp = CustomTileNoAvatar('facultades',
             nombreUniversidad: widget.arguments['nombreUniversidad'],
+            idFacultad: f['id'],
             nombreFacultad: f['nombre']);
         facultades.add(widgetTemp);
       });

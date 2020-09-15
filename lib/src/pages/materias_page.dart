@@ -42,9 +42,7 @@ class _MateriasPageState extends State<MateriasPage> {
   Widget _lista() {
     return FutureBuilder(
       future: materiasProvider.cargarData(
-          widget.arguments['nombreUniversidad'],
-          widget.arguments['nombreFacultad'],
-          widget.arguments['nombreCarrera']),
+          widget.arguments['idCarrera']),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
@@ -60,10 +58,8 @@ class _MateriasPageState extends State<MateriasPage> {
     if (data != null) {
       data.forEach((m) {
         final widgetTemp = CustomTileNoAvatar('materias',
-            nombreUniversidad: widget.arguments['nombreUniversidad'],
-            nombreFacultad: widget.arguments['nombreFacultad'],
-            nombreCarrera: widget.arguments['nombreCarrera'],
-            nombreMateria: m['nombre']);
+            nombreMateria: m['nombre'],
+            idMateria: m['id']);
         materias.add(widgetTemp);
         // facultades.add(Divider());
       });

@@ -18,10 +18,10 @@ class UploadPage extends StatefulWidget {
 class _UploadPageState extends State<UploadPage> {
   String _autor;
   String _descripcion;
-  String _selectedUniversidadValue;
-  String _selectedFacultadValue;
-  String _selectedCarreraValue;
-  String _selectedMateriaValue;
+  int _selectedUniversidadValue;
+  int _selectedFacultadValue;
+  int _selectedCarreraValue;
+  int _selectedMateriaValue;
   String _yearCursado;
 
   String _filePath;
@@ -29,10 +29,10 @@ class _UploadPageState extends State<UploadPage> {
   final _controllerAutor = TextEditingController();
   final _controllerDescripcion = TextEditingController();
 
-  // List listUniversidades = ['Elegí una universidad'];
-  // List listFacultades = ['Elegí una facultad'];
-  // List listCarreras = ['Elegí una carrera'];
-  // List listMaterias = ['Elegí una materia'];
+  List listUniversidades = ['Elegí una universidad'];
+  List listFacultades = ['Elegí una facultad'];
+  List listCarreras = ['Elegí una carrera'];
+  List listMaterias = ['Elegí una materia'];
 
   @override
   void initState() {
@@ -161,7 +161,7 @@ class _UploadPageState extends State<UploadPage> {
             items: snapshot.data
                 .map((value) => DropdownMenuItem<dynamic>(
                       child: Text(value['nombre']),
-                      value: value['nombre'],
+                      value: value['id'],
                     ))
                 .toList(),
             onChanged: (selectedValue) {
@@ -203,7 +203,7 @@ class _UploadPageState extends State<UploadPage> {
               items: snapshot.data
                   .map((value) => DropdownMenuItem<dynamic>(
                         child: Text(value['nombre']),
-                        value: value['nombre'],
+                        value: value['id'],
                       ))
                   .toList(),
               onChanged: (selectedValue) {
@@ -243,8 +243,7 @@ class _UploadPageState extends State<UploadPage> {
       return Center(
         child: FutureBuilder(
           initialData: [],
-          future: carrerasProvider.cargarData(
-              _selectedUniversidadValue, _selectedFacultadValue),
+          future: carrerasProvider.cargarData(_selectedFacultadValue),
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (!snapshot.hasData) return Container();
@@ -254,7 +253,7 @@ class _UploadPageState extends State<UploadPage> {
               items: snapshot.data
                   .map((value) => DropdownMenuItem<dynamic>(
                         child: Text(value['nombre']),
-                        value: value['nombre'],
+                        value: value['id'],
                       ))
                   .toList(),
               onChanged: (selectedValue) {
@@ -301,8 +300,7 @@ class _UploadPageState extends State<UploadPage> {
       return Center(
         child: FutureBuilder(
           initialData: [],
-          future: materiasProvider.cargarData(_selectedUniversidadValue,
-              _selectedFacultadValue, _selectedCarreraValue),
+          future: materiasProvider.cargarData(_selectedCarreraValue),
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (!snapshot.hasData) return Container();
@@ -312,7 +310,7 @@ class _UploadPageState extends State<UploadPage> {
               items: snapshot.data
                   .map((value) => DropdownMenuItem<dynamic>(
                         child: Text(value['nombre']),
-                        value: value['nombre'],
+                        value: value['id'],
                       ))
                   .toList(),
               onChanged: (selectedValue) {
@@ -398,10 +396,11 @@ class _UploadPageState extends State<UploadPage> {
             Map<String, String> body = new Map();
             body['autor'] = _autor;
             body['descripcion'] = _descripcion;
-            body['universidad'] = _selectedUniversidadValue;
-            body['facultad'] = _selectedFacultadValue;
-            body['carrera'] = _selectedCarreraValue;
-            body['materia'] = _selectedMateriaValue;
+            // body['universidad'] = _selectedUniversidadValue.toString();
+            // body['facultad'] = _selectedFacultadValue.toString();
+            // body['carrera'] = _selectedCarreraValue;
+            // body['materia'] = _selectedMateriaValue;
+            body['materiaId'] = _selectedMateriaValue.toString();
             body['yearCursado'] = _yearCursado;
             body['fileName'] = _filePath.split("/").last;
             showDialog(
@@ -430,34 +429,49 @@ class _UploadPageState extends State<UploadPage> {
               },
             );
 
-            await resumenesProvider.save(body, _filePath);
+            await resumenesProvider.save(body, _filePath).then(
+                (value) async => {
+                      await showDialog(
+                          context: context,
+                          child: AlertDialog(
+                            content: Text("Resumen guardado con éxito"),
+                            actions: <Widget>[
+                              FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar"))
+                            ],
+                          )),
+                      await Future.sync(() => Navigator.pop(context)),
 
-            Future.sync(() => Navigator.pop(context));
-
-            showDialog(
-                context: context,
-                child: AlertDialog(
-                  content: Text("Resumen guardado con éxito"),
-                  actions: <Widget>[
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Aceptar"))
-                  ],
-                ));
-            // _alerta();
-            setState(() {
-              // _autor = "";
-              // _descripcion = "";
-              _controllerAutor.clear();
-              _controllerDescripcion.clear();
-              _selectedUniversidadValue = null;
-              _selectedFacultadValue = null;
-              _selectedCarreraValue = null;
-              _selectedMateriaValue = null;
-              _yearCursado = null;
-              _filePath = null;
+                      setState(() {
+                        // _autor = "";
+                        // _descripcion = "";
+                        _controllerAutor.clear();
+                        _controllerDescripcion.clear();
+                        _selectedUniversidadValue = null;
+                        _selectedFacultadValue = null;
+                        _selectedCarreraValue = null;
+                        _selectedMateriaValue = null;
+                        _yearCursado = null;
+                        _filePath = null;
+                      }),
+                      // _alerta();
+                    }, onError: (e) async {
+              await showDialog(
+                  context: context,
+                  child: AlertDialog(
+                    content: Text("Hubo un problema al subir el resumen: $e"),
+                    actions: <Widget>[
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Aceptar"))
+                    ],
+                  ));
+              await Future.sync(() => Navigator.pop(context));
             });
           },
           child: Text(

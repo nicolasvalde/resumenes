@@ -48,8 +48,8 @@ class _ResumenesProvider {
   }
 
   Future<List<Resumen>> getByParameters(Map<String, String> data) async {
-    final url = Uri.http(_url,
-        "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
+    final url = Uri.http(_url, "resumenes/list/${data['idMateria']}");
+    // "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
 
     print("URL: " + url.hasEmptyPath.toString());
     try {
@@ -80,12 +80,16 @@ class _ResumenesProvider {
     request.files.add(
       await http.MultipartFile.fromPath('file', file),
     );
+    // try {
+      await request.send();
 
-    await request.send();
+      print(request.fields);
 
-    print(request.fields);
-
-    return request;
+      return request;
+    // } catch (e) {
+    //   print('ERROR AL GUARDAR EL RESUMEN ${e}');
+    //   return e;
+    // }
   }
 
   update() {}

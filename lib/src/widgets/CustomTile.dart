@@ -5,10 +5,12 @@ import 'package:getflutter/getflutter.dart';
 import 'package:getflutter/shape/gf_avatar_shape.dart';
 
 class CustomTile extends StatelessWidget {
+  int idUniversidad;
   String nombreUniversidad;
   String imagen;
 
-  CustomTile(String nombreUniversidad, String imagen) {
+  CustomTile(int idUniversidad, String nombreUniversidad, String imagen) {
+    this.idUniversidad = idUniversidad;
     this.nombreUniversidad = nombreUniversidad;
     this.imagen = imagen;
   }
@@ -32,7 +34,8 @@ class CustomTile extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.pushNamed(context, 'facultades',
-                arguments: {'nombreUniversidad': nombreUniversidad});
+                arguments: {'idUniversidad': idUniversidad,
+                            'nombreUniversidad': nombreUniversidad});
           },
           splashColor: Colors.white,
           child: GFListTile(

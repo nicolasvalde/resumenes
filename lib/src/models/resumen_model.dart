@@ -15,10 +15,10 @@ class Resumenes {
 class Resumen {
   String id;
   String autor;
-  String universidad;
-  String facultad;
-  String carrera;
-  String materia;
+  int universidadId;
+  int facultadId;
+  int carreraId;
+  int materiaId;
   String fechaSubida;
   String descripcion;
   String fileName;
@@ -27,25 +27,25 @@ class Resumen {
   Resumen(
       {this.id,
       this.autor,
-      this.universidad,
-      this.facultad,
-      this.carrera,
-      this.materia,
+      this.universidadId,
+      this.facultadId,
+      this.carreraId,
+      this.materiaId,
       this.fechaSubida,
       this.descripcion,
       this.fileName,
       this.yearCursado});
 
   Resumen.fromJsonMap(Map<String, dynamic> json) {
-    id          = json['id'];
-    autor       = json['autor'];
-    universidad = json['universidad'];
-    facultad    = json['facultad'];
-    carrera     = json['carrera'];
-    materia     = json['materia'];
-    fechaSubida = json['fechaSubida'];
-    descripcion = json['descripcion'];
-    fileName    = json['fileName'];
-    yearCursado = json['yearCursado'];
+    id            = json['id'];
+    autor         = json['autor'];
+    universidadId = json['universidadId'];
+    facultadId    = json['facultadId'];
+    carreraId     = json['carreraId'];
+    materiaId     = json['materiaId'];
+    fechaSubida   = json['fechaSubida'];
+    descripcion   = json['descripcion'];
+    fileName      = json['fileName'];
+    yearCursado   = json['yearCursado'];
   }
 }
