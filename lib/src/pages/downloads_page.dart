@@ -11,7 +11,8 @@ class DownloadsPage extends StatefulWidget {
 class _DownloadsPageState extends State<DownloadsPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    try {
+      return Container(
       child: FutureBuilder<List<FileSystemEntity>>(
           future: downloadsProvider.list(),
           initialData: [],
@@ -54,6 +55,10 @@ class _DownloadsPageState extends State<DownloadsPage> {
           // },
           ),
     );
+    } catch (e) {
+      return Container();
+    }
+    
   }
 
   List<Widget> _listaItems(List<FileSystemEntity> data) {
@@ -100,8 +105,7 @@ class _DownloadsPageState extends State<DownloadsPage> {
                   height: 45.0,
                   width: 45.0,
                 ),
-                title: Text(file.path.substring(file.path.lastIndexOf("/") + 1,
-                    file.path.lastIndexOf('.'))),
+                title: Text(file.path.substring(file.path.lastIndexOf("/") + 1)),
                 subtitle: Text(size.toStringAsFixed(
                         size.truncateToDouble() == size ? 0 : 2) +
                     " Mb"),

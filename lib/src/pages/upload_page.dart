@@ -37,25 +37,25 @@ class _UploadPageState extends State<UploadPage> {
   @override
   void initState() {
     super.initState();
-    _controllerAutor.addListener(() {
-      final text = _controllerAutor.text;
-      _controllerAutor.value = _controllerAutor.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
+    // _controllerAutor.addListener(() {
+    //   final text = _controllerAutor.text;
+    //   _controllerAutor.value = _controllerAutor.value.copyWith(
+    //     text: text,
+    //     selection:
+    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
+    //     composing: TextRange.empty,
+    //   );
+    // });
 
-    _controllerDescripcion.addListener(() {
-      final text = _controllerDescripcion.text;
-      _controllerDescripcion.value = _controllerDescripcion.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
+    // _controllerDescripcion.addListener(() {
+    //   final text = _controllerDescripcion.text;
+    //   _controllerDescripcion.value = _controllerDescripcion.value.copyWith(
+    //     text: text,
+    //     selection:
+    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
+    //     composing: TextRange.empty,
+    //   );
+    // });
   }
 
   @override
@@ -97,6 +97,7 @@ class _UploadPageState extends State<UploadPage> {
         controller: _controllerAutor,
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(labelText: 'Tu nombre o apodo'),
+        autocorrect: false,
         onChanged: (valor) {
           setState(() {
             _autor = valor;
@@ -114,6 +115,7 @@ class _UploadPageState extends State<UploadPage> {
         autofocus: false,
         minLines: 1,
         maxLines: 3,
+        enableInteractiveSelection: true,
         decoration: InputDecoration(
           labelText: 'Descripción de lo que estás subiendo',
         ),

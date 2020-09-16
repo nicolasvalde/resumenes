@@ -8,6 +8,7 @@ class _DownloadsProvider {
   Future<List<FileSystemEntity>> list() async {
     Directory downloadsDir = await getExternalStorageDirectory();
 
+    print(downloadsDir.listSync().toList().sublist(0, 2));
     return downloadsDir.listSync().toList();
 
     //   await client.getUrl(url).then((HttpClientRequest request) {
