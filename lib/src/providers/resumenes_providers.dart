@@ -73,23 +73,33 @@ class _ResumenesProvider {
 
     var body = json.encode(data);
 
+    String resultado;
+
     final request = http.MultipartRequest('POST', url);
 
     request.fields['resumen'] = body;
+
+    // Por el problema que al enviar .docx por whatsapp se borra la extension
+    if (!file.split("/").last.contains('.')) {
+      file = file + '.docx';
+    }
 
     request.files.add(
       await http.MultipartFile.fromPath('file', file),
     );
     // try {
-      await request.send();
+    await request.send().then((value) => {
+          if (value.statusCode == 200)
+            {resultado = "success"}
+          else
+            {
+              throw ('Fijate que tengas conexión a la red y que el formato del archivo sea válido')
+            }
+        });
 
-      print(request.fields);
+    print("REQUEST FIELDS ${request.fields}");
 
-      return request;
-    // } catch (e) {
-    //   print('ERROR AL GUARDAR EL RESUMEN ${e}');
-    //   return e;
-    // }
+    return request;
   }
 
   update() {}
