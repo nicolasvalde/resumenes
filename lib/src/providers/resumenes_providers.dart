@@ -73,16 +73,24 @@ class _ResumenesProvider {
 
     var body = json.encode(data);
 
+    RegExp regExp = new RegExp(
+      r"(.*?)\.(jpg|.jpeg|.png|doc|pdf|docx|rar|zip)$",
+      caseSensitive: false,
+      multiLine: false,
+    );
+
+    // Por el problema que al enviar .docx por whatsapp se borra la extension
+    if ( !regExp.hasMatch(file.split("/").toString() ) ) {
+      file = file + '.docx';
+    }
+
     String resultado;
 
     final request = http.MultipartRequest('POST', url);
 
     request.fields['resumen'] = body;
 
-    // Por el problema que al enviar .docx por whatsapp se borra la extension
-    if (!file.split("/").last.contains('.')) {
-      file = file + '.docx';
-    }
+    
 
     request.files.add(
       await http.MultipartFile.fromPath('file', file),
