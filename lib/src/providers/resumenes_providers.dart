@@ -1,12 +1,19 @@
 import 'dart:convert';
+import 'package:convert/convert.dart';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:resumenes/src/models/resumen_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
+
+// import 'package:mime/mime.dart';
+import 'package:mime_type/mime_type.dart';
+import 'package:resumenes/src/utils/mimeType.dart';
 
 class _ResumenesProvider {
   //String _url = '10.0.2.2:8080';
@@ -73,41 +80,70 @@ class _ResumenesProvider {
 
     var body = json.encode(data);
 
+    String resultado;
+
     RegExp regExp = new RegExp(
-      r"(.*?)\.(jpg|.jpeg|.png|doc|pdf|docx|rar|zip)$",
+      r"(.*?)\.(jpg|jpeg|doc|pdf|docx|rar|zip)$",
       caseSensitive: false,
       multiLine: false,
     );
-
-    // Por el problema que al enviar .docx por whatsapp se borra la extension
-    if ( !regExp.hasMatch(file.split("/").toString() ) ) {
-      file = file + '.docx';
-    }
-
-    String resultado;
 
     final request = http.MultipartRequest('POST', url);
 
     request.fields['resumen'] = body;
 
-    
+    // request.files.add(
+    //   await http.MultipartFile.fromPath('file', file),
+    // );
 
-    request.files.add(
-      await http.MultipartFile.fromPath('file', file),
-    );
-    // try {
-    await request.send().then((value) => {
-          if (value.statusCode == 200)
-            {resultado = "success"}
-          else
-            {
-              throw ('Fijate que tengas conexión a la red y que el formato del archivo sea válido')
-            }
-        });
+    // Por el problema que al enviar .docx por whatsapp se borra la extension
+    try {
+      if (!regExp.hasMatch(file.split("/").last)) {
+        File tempFile = new File.fromUri(Uri.parse(file));
 
-    print("REQUEST FIELDS ${request.fields}");
+        Uint8List bytes;
 
-    return request;
+        String ext;
+
+        String mime;
+
+        await tempFile
+            .readAsBytes()
+            .then((value) => {
+                  bytes = Uint8List.fromList(value),
+                })
+            .then((value) async => {
+                  mime = await MimeType.getMimeType(bytes, file),
+                })
+            .then((value) => {
+                  ext = extensionFromMime(mime),
+                  print(ext),
+                });
+
+        // request.files.removeLast();
+
+        request.files.add(
+          await http.MultipartFile.fromPath('file', file,
+              filename: '${file.split('/').last}.$ext'),
+        );
+      } else {
+        request.files.add(
+          await http.MultipartFile.fromPath('file', file),
+        );
+      }
+
+      await request.send().then((value) => {
+            if (value.statusCode == 200)
+              {resultado = "success"}
+            else
+              {
+                throw ('Fijate que tengas conexión a la red y que el formato del archivo sea válido')
+              }
+          });
+      // return request;
+    } catch (e) {
+      throw ('Fijate que tengas conexión a la red y que el formato del archivo sea válido');
+    }
   }
 
   update() {}
