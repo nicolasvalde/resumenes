@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[],
@@ -49,11 +48,11 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedBottomIndex,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('Explorar apuntes')),
+                icon: Icon(Icons.search), label: 'Explorar apuntes'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add), title: Text('Subí tu apunte')),
+                icon: Icon(Icons.add), label: 'Subí tu apunte'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.file_download), title: Text('Descargas')),
+                icon: Icon(Icons.file_download), label: 'Descargas'),
           ],
           onTap: _onItemTapped,
         ),

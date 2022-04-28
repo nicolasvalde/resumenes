@@ -18,9 +18,10 @@ class ResumenCard extends StatelessWidget {
           onTap: () {
             print('Card tapped.');
             showDialog(
-              context: context,
-              child: DownloadDialog(resumen),
-            );
+                context: context,
+                builder: (context) {
+                  return DownloadDialog(resumen);
+                });
           },
           child: Container(
             width: 400,

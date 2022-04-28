@@ -435,16 +435,19 @@ class _UploadPageState extends State<UploadPage> {
                 (value) async => {
                       await showDialog(
                           context: context,
-                          child: AlertDialog(
-                            content: Text("Resumen guardado con éxito"),
-                            actions: <Widget>[
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar"))
-                            ],
-                          )),
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Material Dialog'),
+                              content: Text('Resumen guardado con éxito'),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Aceptar')),
+                              ],
+                            );
+                          }),
                       await Future.sync(() => Navigator.pop(context)),
 
                       setState(() {
@@ -463,16 +466,19 @@ class _UploadPageState extends State<UploadPage> {
                     }, onError: (e) async {
               await showDialog(
                   context: context,
-                  child: AlertDialog(
-                    content: Text("Hubo un problema al subir el resumen: $e"),
-                    actions: <Widget>[
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text("Aceptar"))
-                    ],
-                  ));
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Material Dialog'),
+                      content: Text("Hubo un problema al subir el resumen: $e"),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Aceptar')),
+                      ],
+                    );
+                  });
               await Future.sync(() => Navigator.pop(context));
             });
           },

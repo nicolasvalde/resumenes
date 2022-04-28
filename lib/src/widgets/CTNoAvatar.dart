@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getflutter/components/list_tile/gf_list_tile.dart';
-import 'package:getflutter/getflutter.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:getwidget/getwidget.dart';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -19,19 +19,17 @@ class CustomTileNoAvatar extends StatelessWidget {
   String origen;
   String nombreMostrar;
 
-  CustomTileNoAvatar(
-    String origen, {
-      String nombreUniversidad,
+  CustomTileNoAvatar(String origen,
+      {String nombreUniversidad,
       int idFacultad,
       String nombreFacultad,
       int idCarrera,
       String nombreCarrera,
       int idMateria,
-      String nombreMateria
-  }) {
+      String nombreMateria}) {
     this.nombreUniversidad = nombreUniversidad;
     this.idFacultad = idFacultad;
-    this.nombreFacultad =  nombreFacultad;
+    this.nombreFacultad = nombreFacultad;
     this.idCarrera = idCarrera;
     this.nombreCarrera = nombreCarrera;
     this.idMateria = idMateria;
@@ -126,14 +124,12 @@ _getData(String origen, int param) async {
 
   final Database db = await openDatabase(dbPath);
 
-  final List<Map<String, dynamic>> data = await db.query(
-      origen.toUpperCase(),
-      where: origen.substring(0, 1) + '_fk = ?',
-      whereArgs: [param.toString()]);
+  final List<Map<String, dynamic>> data = await db.query(origen.toUpperCase(),
+      where: origen.substring(0, 1) + '_fk = ?', whereArgs: [param.toString()]);
 
   print(data);
 
-  if(origen.compareTo('materias') == 0) {
+  if (origen.compareTo('materias') == 0) {
     final List<Map<String, dynamic>> materiasClone = new List.from(data);
     await db.close();
     return materiasClone;
