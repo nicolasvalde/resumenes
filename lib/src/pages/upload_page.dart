@@ -464,6 +464,7 @@ class _UploadPageState extends State<UploadPage> {
                       }),
                       // _alerta();
                     }, onError: (e) async {
+              print('ERROR =>' + e.toString());
               await showDialog(
                   context: context,
                   builder: (context) {

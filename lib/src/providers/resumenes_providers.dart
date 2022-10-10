@@ -17,7 +17,7 @@ import 'package:resumenes/src/utils/mimeType.dart';
 
 class _ResumenesProvider {
   //String _url = '10.0.2.2:8080';
-  String _url = 'resumenes-sistemas-distribuido.herokuapp.com';
+  String _url = 'vias5w8v6h.execute-api.us-east-1.amazonaws.com';
   // String _url = '10.0.2.2:5000';
 
   _ResumenesProvider() {}
@@ -55,30 +55,43 @@ class _ResumenesProvider {
   }
 
   Future<List<Resumen>> getByParameters(Map<String, String> data) async {
-    final url = Uri.http(_url, "resumenes/list/${data['idMateria']}");
+    final url = Uri.https(_url, "/dev/resumenes/${data['idMateria']}");
     // "resumenes/list/${data['universidad']}/${data['facultad']}/${data['carrera']}/${data['materia']}");
-
+    print("URL => " + url.toString());
     print("URL: " + url.hasEmptyPath.toString());
+
     try {
       final respuesta =
           await http.get(url, headers: {"Accept": "application/json"});
 
+      print('respuesta => ' + respuesta.body);
+
       String source = Utf8Decoder().convert(respuesta.bodyBytes);
 
-      final decodedData = json.decode(source);
+      print('source => ' + source);
+
+      final List<dynamic> decodedData = json.decode(respuesta.body);
+
+      print('decodedData => ' + (decodedData is List<dynamic>).toString());
 
       final resumenes = new Resumenes.fromJsonList(decodedData);
 
+      print(resumenes);
+
       return resumenes.items;
     } catch (e) {
+      print(e);
       return null;
     }
   }
 
   Future save(Map<String, String> data, String file) async {
-    final url = Uri.http(_url, 'resumenes');
+    final url = Uri.parse('https://' + _url + '/dev/resumen/upload');
 
     var body = json.encode(data);
+
+    print('DATA => ' + data.toString());
+    print('BODY => ' + body.toString());
 
     String resultado;
 
@@ -87,6 +100,8 @@ class _ResumenesProvider {
       caseSensitive: false,
       multiLine: false,
     );
+
+    print('URL => ' + url.toString());
 
     final request = http.MultipartRequest('POST', url);
 
@@ -142,6 +157,7 @@ class _ResumenesProvider {
           });
       // return request;
     } catch (e) {
+      print('ERROR => ' + e.toString());
       throw ('Fijate que tengas conexión a la red y que el formato del archivo sea válido');
     }
   }
