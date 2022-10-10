@@ -170,7 +170,9 @@ class _ResumenesProvider {
     Directory downloadsDir = await getExternalStorageDirectory();
     String downloadsPath = downloadsDir.path;
 
-    final url = Uri.http(_url, 'resumenes/download/$id');
+    final url = Uri.https(_url, '/dev/resumen/download/$id');
+
+    print('url => ' + url.toString());
 
     print(downloadsPath);
     HttpClient client = new HttpClient();
