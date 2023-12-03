@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:android_intent/android_intent.dart';
 import 'package:path_provider/path_provider.dart';
 
 class _DownloadsProvider {
@@ -22,7 +23,10 @@ class _DownloadsProvider {
   }
 
   void openFile(String path) {
-    OpenFile.open(path);
+    print('PATH => ' + path);
+    final AndroidIntent intent =
+        AndroidIntent(action: 'action_view', data: Uri.encodeFull(path));
+    intent.launch();
   }
 
   void deleteFile(String path) async {
